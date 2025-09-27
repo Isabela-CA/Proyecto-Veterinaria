@@ -113,6 +113,16 @@ INSERT INTO items_factura (factura_id, producto_id, servicio_descripcion, cantid
 (203, 3, 'Carprofeno 50mg', 2, 32.75, 65.50),
 (204, 4, 'Dexametasona 0.5mg', 1, 15.80, 15.80);
 
+
+INSERT INTO procedimientos_quirurgicos (mascota_id, veterinario_id, fecha_procedimiento,tipo_procedimiento, diagnostico, 
+    descripcion_procedimiento, anestesia_utilizada, duracion_minutos, medicacion_prescrita, cuidados_recomendados, resultado) 
+    VALUES (
+     19, 2, '2025-01-15 10:00:00',
+    'Esterilización', 'Control poblacional - paciente sana',
+    'Ovariohisterectomía rutinaria sin complicaciones',
+    'Isoflurano', 'Analgésico por 3 días, antibiótico por 5 días',
+    'Reposo 10 días, control de herida, evitar lamido', 'EXITOSO'
+);
 -- =========== MÓDULO 5: ACTIVIDADES ESPECIALES ===========
 
 -- 1. Mascotas en adopción
