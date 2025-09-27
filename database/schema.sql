@@ -125,6 +125,25 @@ CREATE TABLE items_factura (
     FOREIGN KEY (factura_id) REFERENCES facturas(id),
     FOREIGN KEY (producto_id) REFERENCES inventario(id)
 )AUTO_INCREMENT = 1;
+
+CREATE TABLE procedimientos_quirurgicos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    mascota_id INT NOT NULL,
+    veterinario_id INT NOT NULL,
+    cita_id INT, 
+    fecha_procedimiento DATETIME NOT NULL,
+    tipo_procedimiento VARCHAR(255) NOT NULL, 
+    diagnostico TEXT NOT NULL,
+    descripcion_procedimiento TEXT NOT NULL,
+    anestesia_utilizada VARCHAR(100),    
+    medicacion_prescrita TEXT,
+    cuidados_recomendados TEXT,
+    resultado VARCHAR(100),
+    FOREIGN KEY (mascota_id) REFERENCES mascotas(id),
+    FOREIGN KEY (veterinario_id) REFERENCES veterinarios(id),
+    FOREIGN KEY (cita_id) REFERENCES citas(id)
+)AUTO_INCREMENT = 300;
+
 -- ----------------------  MODULO 5 ------------------
 -- 1. Mascotas en adopción
 CREATE TABLE mascotas_adopcion (
