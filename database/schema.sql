@@ -101,9 +101,12 @@ CREATE TABLE historial_medico (
     descripcion TEXT,
     diagnostico TEXT,
     tratamiento_recomendado TEXT,
+    producto_id int 
+    cantidad_utilizada int
     FOREIGN KEY (mascota_id) REFERENCES mascotas(id),
     FOREIGN KEY (veterinario_id) REFERENCES veterinarios(id),
     FOREIGN KEY (evento_tipo_id) REFERENCES evento_tipos(id)
+    FOREIGN KEY (producto_id) REFERENCES inventario(id);
 )AUTO_INCREMENT = 150;
  
 CREATE TABLE facturas (

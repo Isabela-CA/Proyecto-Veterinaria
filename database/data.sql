@@ -78,21 +78,30 @@ INSERT INTO citas (mascota_id, veterinario_id, fecha_hora, motivo, estado_id) VA
 -- Citas canceladas
 (6, 3, '2025-09-27 16:00:00', 'Control dermatológico', 5);
 
-INSERT INTO historial_medico (mascota_id, veterinario_id, fecha_evento, evento_tipo_id, descripcion, diagnostico, tratamiento_recomendado) VALUES 
--- Consultas
-(5, 1, '2025-09-23', 1, 'Control anual de salud. Mascota en buen estado general', 'Salud óptima', 'Vacunación anual pendiente. Mantener dieta actual'),
--- Vacunaciones
-(6, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente y antirrábica', 'Vacunación completa', 'Próxima vacunación en 1 año'),
--- Cirugías
-(7, 2, '2025-08-15', 3, 'Esterilización rutinaria. Procedimiento sin complicaciones', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días. Control de sutura'),
--- Desparasitaciones
-(8, 1, '2025-09-10', 4, 'Desparasitación interna y externa', 'Prevención parasitaria', 'Repetir en 3 meses'),
--- Urgencias
-(5, 3, '2025-09-05', 5, 'Consulta urgente por alergia cutánea severa', 'Dermatitis alérgica', 'Antihistamínicos por 7 días. Dieta hipoalergénica'),
--- Controles
-(6, 4, '2025-08-30', 6, 'Control cardíaco rutinario', 'Soplo cardíaco grado I', 'Control cada 6 meses. Restringir ejercicio intenso'),
--- Otras consultas
-(8, 5, '2025-09-12', 6, 'Control oftalmológico anual', 'Catarata incipiente', 'Control en 1 año. Suplementos oculares');
+INSERT INTO historial_medico (mascota_id, veterinario_id, fecha_evento, evento_tipo_id, descripcion, diagnostico, tratamiento_recomendado, producto_id, cantidad_utilizada) VALUES 
+-- Consultas - usando medicamentos básicos para chequeos
+(5, 1, '2025-09-23', 1, 'Control anual de salud. Mascota en buen estado general', 'Salud óptima', 'Vacunación anual pendiente. Mantener dieta actual', 1, 1), -- Amoxicilina como preventivo
+
+-- Vacunaciones - usando vacunas del inventario
+(6, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente y antirrábica', 'Vacunación completa', 'Próxima vacunación en 1 año', 5, 1), -- Vacuna Antirrábica
+(6, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente', 'Vacunación completa', 'Próxima vacunación en 1 año', 6, 1), -- Vacuna Polivalente
+
+-- Cirugías - usando material quirúrgico
+(7, 2, '2025-08-15', 3, 'Esterilización rutinaria. Procedimiento sin complicaciones', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días. Control de sutura', 11, 3), -- Sutura Nylon 3-0
+(7, 2, '2025-08-15', 3, 'Material para cirugía', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días', 9, 5), -- Gasas Estériles
+
+-- Desparasitaciones - usando antiparasitario
+(8, 1, '2025-09-10', 4, 'Desparasitación interna y externa', 'Prevención parasitaria', 'Repetir en 3 meses', 2, 1), -- Ivermectina 1%
+
+-- Urgencias - usando antiinflamatorio para alergia
+(5, 3, '2025-09-05', 5, 'Consulta urgente por alergia cutánea severa', 'Dermatitis alérgica', 'Antihistamínicos por 7 días. Dieta hipoalergénica', 4, 2), -- Dexametasona
+
+-- Controles cardíacos - usando antiinflamatorio para el corazón
+(6, 4, '2025-08-30', 6, 'Control cardíaco rutinario', 'Soplo cardíaco grado I', 'Control cada 6 meses. Restringir ejercicio intenso', 3, 1), -- Carprofeno
+
+-- Control oftalmológico - usando antiinflamatorio ocular
+(8, 5, '2025-09-12', 6, 'Control oftalmológico anual', 'Catarata incipiente', 'Control en 1 año. Suplementos oculares', 4, 1); -- 
+
 
 INSERT INTO facturas (dueno_id, fecha_emision, total) VALUES 
 (79, '2025-09-23 11:45:00', 85.50),
