@@ -8,96 +8,93 @@ import java.util.List;
 
 public class ProcedimientoQuirurgicoController {
 
-    private ProcedimientoQuirurgicoService procedimientoService;
+        private ProcedimientoQuirurgicoService procedimientoService;
 
-    public ProcedimientoQuirurgicoController() {
-        // CORREGIDO: Inicializar correctamente el servicio
-        this.procedimientoService = new ProcedimientoQuirurgicoService();
-    }
-
-    public ProcedimientoQuirurgicoController(ProcedimientoQuirurgicoService procedimientoService) {
-        this.procedimientoService = procedimientoService;
-    }
-
-    public boolean registrarProcedimiento(int mascotaId, int veterinarioId, Integer citaId,
-                                          LocalDateTime fechaProcedimiento, String tipoProcedimiento,
-                                          String diagnostico, String descripcion, String anestesia,
-                                          String medicacion, String cuidados, String resultado) {
-        try {
-            return procedimientoService.registrarProcedimiento(mascotaId, veterinarioId, citaId,
-                    fechaProcedimiento, tipoProcedimiento, diagnostico, descripcion,
-                    anestesia, medicacion, cuidados, resultado);
-        } catch (Exception e) {
-            System.err.println("Error en controller al registrar procedimiento: " + e.getMessage());
-            return false;
+        public ProcedimientoQuirurgicoController() {
         }
-    }
 
-    public List<ProcedimientoQuirurgico> listarTodosLosProcedimientos() {
-        try {
+        /**
+         * Registra un nuevo procedimiento quirúrgico
+         */
+        public boolean registrarProcedimiento(int mascotaId, int veterinarioId, Integer citaId,
+                                              LocalDateTime fechaProcedimiento, String tipoProcedimiento,
+                                              String diagnostico, String descripcion, String anestesia,
+                                              String medicacion, String cuidados, String resultado) {
+            try {
+                return procedimientoService.registrarProcedimiento(mascotaId, veterinarioId, citaId,
+                        fechaProcedimiento, tipoProcedimiento, diagnostico, descripcion,
+                        anestesia, medicacion, cuidados, resultado);
+            } catch (Exception e) {
+                System.err.println("Error en controller al registrar procedimiento: " + e.getMessage());
+                return false;
+            }
+        }
+
+        /**
+         * Lista todos los procedimientos quirúrgicos
+         */
+        public List<ProcedimientoQuirurgico> listarTodosLosProcedimientos() {
             return procedimientoService.listarTodosLosProcedimientos();
-        } catch (Exception e) {
-            System.err.println("Error en controller al listar procedimientos: " + e.getMessage());
-            return List.of();
         }
-    }
 
-    public ProcedimientoQuirurgico buscarProcedimientoPorId(int id) {
-        try {
+        /**
+         * Busca un procedimiento por ID
+         */
+        public ProcedimientoQuirurgico buscarProcedimientoPorId(int id) {
             return procedimientoService.buscarProcedimientoPorId(id);
-        } catch (Exception e) {
-            System.err.println("Error en controller al buscar procedimiento: " + e.getMessage());
-            return null;
         }
-    }
 
-    public boolean modificarProcedimiento(ProcedimientoQuirurgico procedimiento) {
-        try {
-            return procedimientoService.modificarProcedimiento(procedimiento);
-        } catch (Exception e) {
-            System.err.println("Error en controller al modificar procedimiento: " + e.getMessage());
-            return false;
+        /**
+         * Modifica un procedimiento existente
+         */
+        public boolean modificarProcedimiento(ProcedimientoQuirurgico procedimiento) {
+            try {
+                return procedimientoService.modificarProcedimiento(procedimiento);
+            } catch (Exception e) {
+                System.err.println("Error en controller al modificar procedimiento: " + e.getMessage());
+                return false;
+            }
         }
-    }
 
-    public List<ProcedimientoQuirurgico> consultarProcedimientosPorMascota(int mascotaId) {
-        try {
+        /**
+         * Consulta procedimientos por mascota
+         */
+        public List<ProcedimientoQuirurgico> consultarProcedimientosPorMascota(int mascotaId) {
             return procedimientoService.consultarProcedimientosPorMascota(mascotaId);
-        } catch (Exception e) {
-            System.err.println("Error en controller al consultar por mascota: " + e.getMessage());
-            return List.of();
         }
-    }
 
-    public List<ProcedimientoQuirurgico> consultarProcedimientosPorVeterinario(int veterinarioId) {
-        try {
+        /**
+         * Consulta procedimientos por veterinario
+         */
+        public List<ProcedimientoQuirurgico> consultarProcedimientosPorVeterinario(int veterinarioId) {
             return procedimientoService.consultarProcedimientosPorVeterinario(veterinarioId);
-        } catch (Exception e) {
-            System.err.println("Error en controller al consultar por veterinario: " + e.getMessage());
-            return List.of();
         }
-    }
 
-    public boolean actualizarSeguimiento(int procedimientoId, String nuevoResultado,
-                                         String cuidadosActualizados, String medicacionActualizada) {
-        try {
-            return procedimientoService.actualizarSeguimientoPostoperatorio(procedimientoId,
-                    nuevoResultado, cuidadosActualizados, medicacionActualizada);
-        } catch (Exception e) {
-            System.err.println("Error en controller al actualizar seguimiento: " + e.getMessage());
-            return false;
+        /**
+         * Actualiza el seguimiento postoperatorio
+         */
+        public boolean actualizarSeguimiento(int procedimientoId, String nuevoResultado,
+                                             String cuidadosActualizados, String medicacionActualizada) {
+            try {
+                return procedimientoService.actualizarSeguimientoPostoperatorio(procedimientoId,
+                        nuevoResultado, cuidadosActualizados, medicacionActualizada);
+            } catch (Exception e) {
+                System.err.println("Error en controller al actualizar seguimiento: " + e.getMessage());
+                return false;
+            }
         }
-    }
 
-    public void generarReporte(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        try {
+        /**
+         * Genera reporte de procedimientos
+         */
+        public void generarReporte(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
             procedimientoService.generarReporteProcedimientos(fechaInicio, fechaFin);
-        } catch (Exception e) {
-            System.err.println("Error en controller al generar reporte: " + e.getMessage());
+        }
+
+        /**
+         * Obtiene los tipos de procedimiento disponibles
+         */
+        public String[] getTiposProcedimiento() {
+            return ProcedimientoQuirurgicoService.TIPOS_PROCEDIMIENTO;
         }
     }
-
-    public String[] getTiposProcedimiento() {
-        return ProcedimientoQuirurgicoService.TIPOS_PROCEDIMIENTO;
-    }
-}

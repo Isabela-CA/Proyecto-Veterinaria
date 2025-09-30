@@ -64,7 +64,7 @@ public class VeterinarioDAO implements IVeterinarioDAO {
             ps.setString(3, veterinario.getEspecialidad().toString());
             ps.setString(4, veterinario.getTelefono());
             ps.setString(5, veterinario.getEmail());
-            ps.setDate(6, Date.valueOf(veterinario.getFecha_contratacion()));
+            ps.setDate(6, Date.valueOf(veterinario.getFetch_contradiction()));
             ps.setInt(7, veterinario.getActivo());
 
             int filasAfectadas = ps.executeUpdate();
@@ -90,7 +90,7 @@ public class VeterinarioDAO implements IVeterinarioDAO {
             ps.setString(3, veterinario.getEspecialidad().toString());
             ps.setString(4, veterinario.getTelefono());
             ps.setString(5, veterinario.getEmail());
-            ps.setDate(6, Date.valueOf(veterinario.getFecha_contratacion()));
+            ps.setDate(6, Date.valueOf(veterinario.getFetch_contradiction()));
             ps.setInt(7, veterinario.getActivo());
             ps.setInt(8, veterinario.getId());
 
@@ -154,7 +154,7 @@ public class VeterinarioDAO implements IVeterinarioDAO {
         veterinario.setEspecialidad(EspecialidadVeterinario.Especialidad.fromString(rs.getString("especialidad")));
         veterinario.setTelefono(rs.getString("telefono"));
         veterinario.setEmail(rs.getString("email"));
-        veterinario.setFecha_contratacion(rs.getDate("fecha_contratacion").toLocalDate());
+        veterinario.setFetch_contradiction(String.valueOf(rs.getDate("fecha_contratacion").toLocalDate()));
         veterinario.setActivo(rs.getInt("activo"));
         return veterinario;
     }

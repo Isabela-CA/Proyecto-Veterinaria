@@ -15,10 +15,6 @@ public class EspecialidadVeterinario {
             this.valor = valor;
         }
 
-        public String getValor() {
-            return valor;
-        }
-
         @Override
         public String toString() {
             return valor;

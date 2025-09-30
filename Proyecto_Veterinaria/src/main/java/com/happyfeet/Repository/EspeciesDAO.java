@@ -20,7 +20,7 @@ public class EspeciesDAO implements IEspecies {
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                var especie = new Especies();
+                Especies especie = new Especies();
                 especie.setId(rs.getInt("id"));
                 especie.setNombre(rs.getString("nombre"));
                 especies.add(especie);
@@ -34,10 +34,10 @@ public class EspeciesDAO implements IEspecies {
 
     @Override
     public boolean buscarEspecies(Especies especies) {
-        PreparedStatement ps;
-        ResultSet rs;
-        var con = DatabaseConfig.getConexion();
-        var sql = "SELECT * FROM especies WHERE id = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = DatabaseConfig.getConexion();
+        String sql = "SELECT * FROM especies WHERE id = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, especies.getId());
@@ -51,9 +51,11 @@ public class EspeciesDAO implements IEspecies {
             System.out.println("Error al buscar la especie por id: " + e.getMessage());
         } finally {
             try {
-                con.close();
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (con != null) con.close();
             } catch (Exception e) {
-                System.out.println("Error al cerrar conexion: " + e.getMessage());
+                System.out.println("Error al cerrar recursos: " + e.getMessage());
             }
         }
         return false;
@@ -95,14 +97,5 @@ public class EspeciesDAO implements IEspecies {
             e.printStackTrace();
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        EspeciesDAO especiesDao = new EspeciesDAO();
-
-
-        System.out.println("*** Listar ESPECIES ***");
-        var especies = especiesDao.listarEspecies();
-        especies.forEach(System.out::println);
     }
 }

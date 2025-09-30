@@ -8,7 +8,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HistorialClinicoDAO implements IHistorialClinicoDAO {
 
     @Override
@@ -44,7 +43,7 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
                 return mapearHistorial(rs);
             }
         } catch (SQLException e) {
-            System.out.println("Error al buscar historial clínico por ID: " + e.getMessage());
+            System.out.println("Error al buscar el historial clínico por ID: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
@@ -142,9 +141,9 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
         return historiales;
     }
 
-    // Método auxiliar para mapear ResultSet a HistorialClinico
+    // Método para mapear ResultSet a HistorialClinico
     private HistorialClinico mapearHistorial(ResultSet rs) throws SQLException {
-        HistorialClinico historial = new HistorialClinico();
+        var historial = new HistorialClinico();
         historial.setId(rs.getInt("id"));
         historial.setMascota_id(rs.getInt("mascota_id"));
         historial.setVeterinario_id(rs.getInt("veterinario_id"));
@@ -163,5 +162,3 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
         return historial;
     }
 }
-
-
