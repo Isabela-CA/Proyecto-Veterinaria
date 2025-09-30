@@ -73,7 +73,7 @@ CREATE TABLE veterinarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     documento_identidad VARCHAR(20) UNIQUE NOT NULL,
     nombre_completo VARCHAR(255) NOT NULL,
-    especialidad ENUM('General', 'Cirugía', 'Dermatología', 'Cardiología', 'Oftalmología', 'Odontología') NOT NULL,
+    especialidad ENUM('General', 'Cirugia', 'Dermatologia', 'Cardiologia', 'Oftalmologia', 'Odontologia') NOT NULL,
     telefono VARCHAR(20),
     email VARCHAR(100) UNIQUE NOT NULL,
     fecha_contratacion DATE NOT NULL,

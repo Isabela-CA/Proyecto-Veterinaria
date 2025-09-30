@@ -58,12 +58,12 @@ INSERT INTO inventario (nombre_producto, producto_tipo_id, descripcion, fabrican
 ('Eukanuba Razas Pequeñas', 4, 'Alimento específico para razas pequeñas', 'Eukanuba', 'LOT-EUK-2025K', 20, 5, '2025-09-10', 88.00);
 
 INSERT INTO veterinarios (documento_identidad, nombre_completo, especialidad, telefono, email, fecha_contratacion, activo) VALUES 
-('VET-001', 'Dra. María Alejandra González', 'General', '300-1112233', 'maria.gonzalez@happyfeet.com', '2022-01-15', TRUE),
-('VET-002', 'Dr. Carlos Eduardo Rodríguez', 'Cirugía', '300-4455667', 'carlos.rodriguez@happyfeet.com', '2022-03-20', TRUE),
-('VET-003', 'Dra. Ana Patricia López', 'Dermatología', '300-7788990', 'ana.lopez@happyfeet.com', '2023-01-10', TRUE),
-('VET-004', 'Dr. Javier Andrés Martínez', 'Cardiología', '300-1122334', 'javier.martinez@happyfeet.com', '2023-06-01', TRUE),
-('VET-005', 'Dra. Sofia Isabel Ramírez', 'Oftalmología', '300-5566778', 'sofia.ramirez@happyfeet.com', '2024-02-14', TRUE),
-('VET-006', 'Dr. Miguel Ángel Torres', 'Odontología', '300-9900112', 'miguel.torres@happyfeet.com', '2024-03-10', TRUE);
+('VET-001', 'Dra. María Alejandra González', 'General', '300-1112233', 'maria.gonzalez@happyfeet.com', '2025-01-15', TRUE),
+('VET-002', 'Dr. Carlos Eduardo Rodríguez', 'Cirugia', '300-4455667', 'carlos.rodriguez@happyfeet.com', '2025-03-20', TRUE),
+('VET-003', 'Dra. Ana Patricia López', 'Dermatologia', '300-7788990', 'ana.lopez@happyfeet.com', '2025-01-10', TRUE),
+('VET-004', 'Dr. Javier Andrés Martínez', 'Cardiologia', '300-1122334', 'javier.martinez@happyfeet.com', '2025-06-01', TRUE),
+('VET-005', 'Dra. Sofia Isabel Ramírez', 'Oftalmologia', '300-5566778', 'sofia.ramirez@happyfeet.com', '2024-02-14', TRUE),
+('VET-006', 'Dr. Miguel Ángel Torres', 'Odontologia', '300-9900112', 'miguel.torres@happyfeet.com', '2024-03-10', TRUE);
 
 
 INSERT INTO citas (mascota_id, veterinario_id, fecha_hora, motivo, estado_id) VALUES 
