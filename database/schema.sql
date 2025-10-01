@@ -1,4 +1,4 @@
-create database Veterinaria_Happy_Feet;
+ create database Veterinaria_Happy_Feet;
 use Veterinaria_Happy_Feet;
 -- =========== TABLAS DE CONSULTA (LOOKUP TABLES) ===========
 
@@ -106,7 +106,7 @@ CREATE TABLE historial_medico (
     FOREIGN KEY (mascota_id) REFERENCES mascotas(id),
     FOREIGN KEY (veterinario_id) REFERENCES veterinarios(id),
     FOREIGN KEY (evento_tipo_id) REFERENCES evento_tipos(id),
-    FOREIGN KEY (producto_id) REFERENCES inventario(id);
+    FOREIGN KEY (producto_id) REFERENCES inventario(id)
 )AUTO_INCREMENT = 150;
  
 CREATE TABLE facturas (
