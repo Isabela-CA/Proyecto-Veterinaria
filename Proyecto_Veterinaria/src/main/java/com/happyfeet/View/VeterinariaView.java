@@ -5,10 +5,10 @@ import com.happyfeet.Controller.*;
 import java.util.Scanner;
 
 public class VeterinariaView {
-    private static Scanner input = new Scanner(System.in);
+    private static final Scanner input = new Scanner(System.in);
 
     // Controladores
-    private static DuenosController duenosController = new DuenosController();
+    private static final DuenosController duenosController = new DuenosController();
     private static MascotaController mascotaController = new MascotaController();
     private static CitaController citaController = new CitaController();
     private static HistorialClinicoController historialController = new HistorialClinicoController();

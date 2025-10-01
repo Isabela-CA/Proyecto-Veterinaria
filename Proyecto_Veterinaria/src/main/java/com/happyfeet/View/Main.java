@@ -28,9 +28,9 @@ public class Main {
     );
 
     // Controladores
-    private static final DuenosController duenosController = new DuenosController(duenoService);
-    private static final MascotaController mascotaController = new MascotaController(mascotaService);
-    private static final CitaController citaController = new CitaController(citaService);
+    private static final DuenosController duenosController = new DuenosController();
+    private static final MascotaController mascotaController = new MascotaController();
+    private static final CitaController citaController = new CitaController();
     private static final HistorialClinicoController historialController = new HistorialClinicoController();
     private static final ProcedimientoQuirurgicoController procedimientoController =
             new ProcedimientoQuirurgicoController();

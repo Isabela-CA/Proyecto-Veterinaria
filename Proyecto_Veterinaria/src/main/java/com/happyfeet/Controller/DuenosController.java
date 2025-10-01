@@ -1,7 +1,6 @@
 package com.happyfeet.Controller;
 
 import com.happyfeet.Repository.DuenosDAO;
-import com.happyfeet.Service.DuenoService;
 import com.happyfeet.model.entities.Duenos;
 
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
     public class DuenosController {
         private final DuenosDAO duenosDAO;
 
-        public DuenosController(DuenoService duenoService) {
+        public DuenosController() {
             this.duenosDAO = new DuenosDAO();
         }
 

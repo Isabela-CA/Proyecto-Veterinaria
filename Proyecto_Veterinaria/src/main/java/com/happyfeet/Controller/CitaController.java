@@ -13,6 +13,10 @@ public class CitaController {
         this.citaService = citaService;
     }
 
+    public CitaController() {
+        this.citaService = new CitaService();
+    }
+
     public boolean programarCita(int mascotaId, int veterinarioId, LocalDateTime fechaHora, String motivo) {
         try {
             return citaService.programarCita(mascotaId, veterinarioId, fechaHora, motivo);

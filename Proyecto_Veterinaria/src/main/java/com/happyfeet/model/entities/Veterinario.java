@@ -122,11 +122,4 @@ public class Veterinario {
                 '}';
     }
 
-    public String getFetch_contradiction() {
-        return fetch_contradiction;
-    }
-
-    public void setFetch_contradiction(String fetchContradiction) {
-        this.fetch_contradiction = fetchContradiction;
-    }
 }

@@ -10,17 +10,24 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Servicio para gestión de citas veterinarias
- * Migrado a Java 17 con características modernas
- */
 public class CitaService {
 
     private final CitaDAO citaDAO;
     private final MascotaDAO mascotaDAO;
     private final VeterinarioDAO veterinarioDAO;
 
-    // Constantes de estado usando record pattern (Java 17)
+    // Record para resultado de validación (Java 17)
+    public record ResultadoValidacion(boolean esValido, String mensaje) {
+        public static ResultadoValidacion valido() {
+            return new ResultadoValidacion(true, "");
+        }
+
+        public static ResultadoValidacion invalido(String mensaje) {
+            return new ResultadoValidacion(false, mensaje);
+        }
+    }
+
+    // Constantes de estado
     public static final int ESTADO_PROGRAMADA = 1;
     public static final int ESTADO_CONFIRMADA = 2;
     public static final int ESTADO_EN_PROCESO = 3;
@@ -46,6 +53,61 @@ public class CitaService {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Valida los datos de una cita antes de programarla
+     */
+    private ResultadoValidacion validarDatosCita(int mascotaId, int veterinarioId,
+                                                 LocalDateTime fechaHora, String motivo) {
+        // Validar que la mascota existe
+        try {
+            var mascota = mascotaDAO.buscarMascotaPorId(mascotaId);
+            if (mascota == null) {
+                return ResultadoValidacion.invalido("La mascota con ID " + mascotaId + " no existe.");
+            }
+        } catch (Exception e) {
+            return ResultadoValidacion.invalido("Error al verificar la mascota: " + e.getMessage());
+        }
+
+        // Validar que el veterinario existe
+        try {
+            var veterinario = veterinarioDAO.buscarVeterinarioPorId(veterinarioId);
+            if (veterinario == null) {
+                return ResultadoValidacion.invalido("El veterinario con ID " + veterinarioId + " no existe.");
+            }
+            if (veterinario.getActivo() == 0) {
+                return ResultadoValidacion.invalido("El veterinario no está activo.");
+            }
+        } catch (Exception e) {
+            return ResultadoValidacion.invalido("Error al verificar el veterinario: " + e.getMessage());
+        }
+
+        // Validar fecha y hora
+        if (fechaHora == null) {
+            return ResultadoValidacion.invalido("La fecha y hora no pueden ser nulas.");
+        }
+
+        if (fechaHora.isBefore(LocalDateTime.now())) {
+            return ResultadoValidacion.invalido("No se pueden programar citas en el pasado.");
+        }
+
+        // Validar disponibilidad del veterinario
+        if (!verificarDisponibilidadVeterinario(veterinarioId, fechaHora)) {
+            return ResultadoValidacion.invalido(
+                    "El veterinario no está disponible en la fecha y hora solicitadas.");
+        }
+
+        // Validar motivo
+        if (motivo == null || motivo.trim().isEmpty()) {
+            return ResultadoValidacion.invalido("El motivo de la cita no puede estar vacío.");
+        }
+
+        if (motivo.trim().length() < 5) {
+            return ResultadoValidacion.invalido("El motivo debe tener al menos 5 caracteres.");
+        }
+
+        return ResultadoValidacion.valido();
     }
 
     public List<Cita> listarTodasLasCitas() {
@@ -193,8 +255,6 @@ public class CitaService {
     public boolean marcarNoAsistio(int citaId) {
         return cambiarEstadoCita(citaId, ESTADO_NO_ASISTIO);
     }
-
-
 
     private boolean verificarDisponibilidadVeterinario(int veterinarioId, LocalDateTime fechaHora) {
         try {
