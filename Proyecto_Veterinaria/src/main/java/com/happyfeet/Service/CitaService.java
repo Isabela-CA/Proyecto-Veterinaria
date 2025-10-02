@@ -36,7 +36,7 @@ public class CitaService {
     public static final int ESTADO_NO_ASISTIO = 6;
 
     public CitaService() {
-        this.citaDAO = new citaDAO();
+        this.citaDAO = new CitaDAO();
         this.mascotaDAO = new MascotaDAO();
         this.veterinarioDAO = new VeterinarioDAO();
     }
