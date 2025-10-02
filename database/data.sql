@@ -1,7 +1,6 @@
 insert into especies (nombre) 
 values ('Perro'),('Gato'),('Ave'),('Roedor');
 
-
 insert into razas (especie_id, nombre) 
 values (1, 'Pastor Aleman'),
 (2, 'Siames'),
@@ -68,41 +67,39 @@ INSERT INTO veterinarios (documento_identidad, nombre_completo, especialidad, te
 
 INSERT INTO citas (mascota_id, veterinario_id, fecha_hora, motivo, estado_id) VALUES 
 -- Citas programadas
-(100, 1, '2025-09-25 09:00:00', 'Consulta de rutina anual', 1),
+(1, 1, '2025-09-25 09:00:00', 'Consulta de rutina anual', 1),
 -- Citas confirmadas
-(102, 4, '2025-09-26 14:00:00', 'Control cardíaco', 2),
+(2, 4, '2025-09-26 14:00:00', 'Control cardíaco', 2),
 -- Citas en proceso
-(103, 5, '2025-09-24 15:30:00', 'Problemas oculares', 3),
+(3, 5, '2025-09-24 15:30:00', 'Problemas oculares', 3),
 -- Citas finalizadas
-(104, 2, '2025-09-22 09:00:00', 'Consulta por vómitos', 4),
+(4, 2, '2025-09-22 09:00:00', 'Consulta por vómitos', 4),
 -- Citas canceladas
-(105, 3, '2025-09-27 16:00:00', 'Control dermatológico', 5);
-
-
+(5, 3, '2025-09-27 16:00:00', 'Control dermatológico', 5);
 
 INSERT INTO historial_medico (mascota_id, veterinario_id, fecha_evento, evento_tipo_id, descripcion, diagnostico, tratamiento_recomendado, producto_id, cantidad_utilizada) VALUES 
 -- Consultas - usando medicamentos básicos para chequeos
-(100, 1, '2025-09-23', 1, 'Control anual de salud. Mascota en buen estado general', 'Salud óptima', 'Vacunación anual pendiente. Mantener dieta actual', 1, 1), -- Amoxicilina como preventivo
+(1, 1, '2025-09-23', 1, 'Control anual de salud. Mascota en buen estado general', 'Salud óptima', 'Vacunación anual pendiente. Mantener dieta actual', 1, 1), -- Amoxicilina como preventivo
 
 -- Vacunaciones - usando vacunas del inventario
-(101, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente y antirrábica', 'Vacunación completa', 'Próxima vacunación en 1 año', 5, 1), -- Vacuna Antirrábica
-(102, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente', 'Vacunación completa', 'Próxima vacunación en 1 año', 6, 1), -- Vacuna Polivalente
+(2, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente y antirrábica', 'Vacunación completa', 'Próxima vacunación en 1 año', 5, 1), -- Vacuna Antirrábica
+(3, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente', 'Vacunación completa', 'Próxima vacunación en 1 año', 6, 1), -- Vacuna Polivalente
 
 -- Cirugías - usando material quirúrgico
-(103, 2, '2025-08-15', 3, 'Esterilización rutinaria. Procedimiento sin complicaciones', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días. Control de sutura', 11, 3), -- Sutura Nylon 3-0
-(104, 2, '2025-08-15', 3, 'Material para cirugía', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días', 9, 5), -- Gasas Estériles
+(4, 2, '2025-08-15', 3, 'Esterilización rutinaria. Procedimiento sin complicaciones', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días. Control de sutura', 11, 3), -- Sutura Nylon 3-0
+(5, 2, '2025-08-15', 3, 'Material para cirugía', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días', 9, 5), -- Gasas Estériles
 
 -- Desparasitaciones - usando antiparasitario
-(105, 1, '2025-09-10', 4, 'Desparasitación interna y externa', 'Prevención parasitaria', 'Repetir en 3 meses', 2, 1), -- Ivermectina 1%
+(5, 1, '2025-09-10', 4, 'Desparasitación interna y externa', 'Prevención parasitaria', 'Repetir en 3 meses', 2, 1), -- Ivermectina 1%
 
 -- Urgencias - usando antiinflamatorio para alergia
-(106, 3, '2025-09-05', 5, 'Consulta urgente por alergia cutánea severa', 'Dermatitis alérgica', 'Antihistamínicos por 7 días. Dieta hipoalergénica', 4, 2), -- Dexametasona
+(6, 3, '2025-09-05', 5, 'Consulta urgente por alergia cutánea severa', 'Dermatitis alérgica', 'Antihistamínicos por 7 días. Dieta hipoalergénica', 4, 2), -- Dexametasona
 
 -- Controles cardíacos - usando antiinflamatorio para el corazón
-(107, 4, '2025-08-30', 6, 'Control cardíaco rutinario', 'Soplo cardíaco grado I', 'Control cada 6 meses. Restringir ejercicio intenso', 3, 1), -- Carprofeno
+(7, 4, '2025-08-30', 6, 'Control cardíaco rutinario', 'Soplo cardíaco grado I', 'Control cada 6 meses. Restringir ejercicio intenso', 3, 1), -- Carprofeno
 
 -- Control oftalmológico - usando antinflamatorio ocular
-(107, 5, '2025-09-12', 6, 'Control oftalmológico anual', 'Catarata incipiente', 'Control en 1 año. Suplementos oculares', 4, 1);
+(7, 5, '2025-09-12', 6, 'Control oftalmológico anual', 'Catarata incipiente', 'Control en 1 año. Suplementos oculares', 4, 1);
 
 
 INSERT INTO facturas (dueno_id, fecha_emision, total) VALUES 
@@ -113,23 +110,22 @@ INSERT INTO facturas (dueno_id, fecha_emision, total) VALUES
 (4, '2025-09-10 14:40:00', 95.00);
 
 INSERT INTO items_factura (factura_id, producto_id, servicio_descripcion, cantidad, precio_unitario, subtotal) VALUES 
-(210, NULL, 'Consulta general', 1, 30.00, 30.00),
-(211, 5, 'Vacuna Antirrábica', 1, 45.00, 45.00),
-(212, NULL, 'Cirugía de esterilización', 1, 120.00, 120.00),
-(213, 1, 'Amoxicilina 500mg', 2, 25.00, 50.00),
-(214, 9, 'Gasas Estériles', 1, 5.25, 5.25),
-(212, 10, 'Guantes Latex', 1, 12.00, 12.00),
-(211, NULL, 'Consulta dermatológico', 1, 35.00, 35.00),
-(211, 2, 'Ivermectina 1%', 1, 18.50, 18.50),
-(213, 3, 'Carprofeno 50mg', 2, 32.75, 65.50),
-(214, 4, 'Dexametasona 0.5mg', 1, 15.80, 15.80);
+(200, NULL, 'Consulta general', 1, 30.00, 30.00),
+(201, 5, 'Vacuna Antirrábica', 1, 45.00, 45.00),
+(202, NULL, 'Cirugía de esterilización', 1, 120.00, 120.00),
+(203, 1, 'Amoxicilina 500mg', 2, 25.00, 50.00),
+(204, 9, 'Gasas Estériles', 1, 5.25, 5.25),
+(202, 10, 'Guantes Latex', 1, 12.00, 12.00),
+(201, NULL, 'Consulta dermatológico', 1, 35.00, 35.00),
+(201, 2, 'Ivermectina 1%', 1, 18.50, 18.50),
+(203, 3, 'Carprofeno 50mg', 2, 32.75, 65.50),
+(204, 4, 'Dexametasona 0.5mg', 1, 15.80, 15.80);
 
-SELECT * from veterinarios v  ;
 
 INSERT INTO procedimientos_quirurgicos (mascota_id, veterinario_id, fecha_procedimiento,tipo_procedimiento, diagnostico, 
     descripcion_procedimiento, anestesia_utilizada, medicacion_prescrita, cuidados_recomendados, resultado) 
     VALUES (
-     100, 2, '2025-01-15 10:00:00',
+     1, 2, '2025-01-15 10:00:00',
     'Esterilización', 'Control poblacional - paciente sana',
     'Ovariohisterectomía rutinaria sin complicaciones',
     'Isoflurano', 'Analgésico por 3 días, antibiótico por 5 días',
@@ -141,13 +137,11 @@ INSERT INTO procedimientos_quirurgicos (mascota_id, veterinario_id, fecha_proced
 
 -- 1. Mascotas en adopción
 INSERT INTO mascotas_adopcion (mascota_id, fecha_ingreso, descripcion, estado, observaciones, fecha_adopcion, adoptante_id) VALUES 
-(100, '2025-08-10', 'Labrador mezcla, 2 años, juguetón y bueno con niños', 'DISPONIBLE', 'Esterilizado y vacunado', NULL, NULL),
-(101, '2025-05-01', 'Gato común europeo, 1 año, tranquilo y cariñoso', 'DISPONIBLE', 'Desparasitado, busca hogar tranquilo', NULL, NULL),
-(102, '2025-07-15', 'Cachorro mestizo, 4 meses, energía alta', 'EN_PROCESO', 'En evaluación con familia candidata', NULL, NULL),
-(103, '2025-06-20', 'Perra adulta, 3 años, calmada y obediente', 'ADOPTADA', 'Excelente adaptación', '2025-08-05', 1),
-(104, '2025-05-30', 'Gato siamés, 2 años, requiere atención especial', 'ADOPTADA', 'Adoptado por familia experimentada', '2025-07-12', 3);
-
-SELECT * from duenos d ;
+(1, '2025-08-10', 'Labrador mezcla, 2 años, juguetón y bueno con niños', 'DISPONIBLE', 'Esterilizado y vacunado', NULL, NULL),
+(2, '2025-05-01', 'Gato común europeo, 1 año, tranquilo y cariñoso', 'DISPONIBLE', 'Desparasitado, busca hogar tranquilo', NULL, NULL),
+(3, '2025-07-15', 'Cachorro mestizo, 4 meses, energía alta', 'EN_PROCESO', 'En evaluación con familia candidata', NULL, NULL),
+(5, '2025-06-20', 'Perra adulta, 3 años, calmada y obediente', 'ADOPTADA', 'Excelente adaptación', '2025-08-05', 1),
+(4, '2025-05-30', 'Gato siamés, 2 años, requiere atención especial', 'ADOPTADA', 'Adoptado por familia experimentada', '2025-07-12', 3);
 
 -- 2. Club de mascotas frecuentes
 INSERT INTO club_mascotas_frecuentes (dueno_id, fecha_registro, puntos_acumulados, nivel, beneficios_activos) VALUES 
@@ -166,23 +160,21 @@ INSERT INTO jornadas_vacunacion (fecha_jornada, ubicacion, descripcion, total_ma
 
 -- 4. Registros de jornada
 INSERT INTO registros_jornada (jornada_id, mascota_id, fecha_registro, vacuna_aplicada, lote_vacuna, observaciones) VALUES 
-(1, 100, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024A', 'Mascota en buen estado'),
-(1, 101, '2025-06-20', 'Vacuna Polivalente', 'LOT-POLI-2024B', 'Requiere control en 1 año'),
-(1, 103, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024A', 'Sin reacciones adversas'),
-(2, 104, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024B', 'Primera vacunación'),
-(2, 103, '2025-06-20', 'Vacuna Polivalente', 'LOT-POLI-2024C', 'Refuerzo anual'),
-(3, 105, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024C', 'Programada');
-
-SELECT * FROM razas r ;
+(1, 1, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024A', 'Mascota en buen estado'),
+(1, 2, '2025-06-20', 'Vacuna Polivalente', 'LOT-POLI-2024B', 'Requiere control en 1 año'),
+(1, 3, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024A', 'Sin reacciones adversas'),
+(2, 4, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024B', 'Primera vacunación'),
+(2, 5, '2025-06-20', 'Vacuna Polivalente', 'LOT-POLI-2024C', 'Refuerzo anual'),
+(3, 5, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024C', 'Programada');
 
 -- 5. Sistema de puntos
 INSERT INTO puntos_club (club_id, factura_id, puntos_ganados, fecha_ganancia, fecha_vencimiento, estado) VALUES 
-(25, 210, 8, '2024-09-23', '2025-12-23', 'ACTIVO'),
-(26, 211, 15, '2024-09-20', '2026-03-20', 'ACTIVO'),
-(27, 212, 4, '2024-09-18', '2026-03-18', 'ACTIVO'),
-(28, 213, 22, '2024-09-15', '2026-03-15', 'ACTIVO'),
-(29, 214, 9, '2024-09-10', '2026-03-10', 'USADO'),
-(30, 210, 6, '2024-03-22', '2024-12-22', 'ACTIVO');
+(1, 201, 8, '2024-09-23', '2025-12-23', 'ACTIVO'),
+(2, 201, 15, '2024-09-20', '2026-03-20', 'ACTIVO'),
+(3, 202, 4, '2024-09-18', '2026-03-18', 'ACTIVO'),
+(4, 203, 22, '2024-09-15', '2026-03-15', 'ACTIVO'),
+(5, 204, 9, '2024-09-10', '2026-03-10', 'USADO'),
+(5, 202, 6, '2024-03-22', '2024-12-22', 'ACTIVO');
 
 -- 6. Beneficios del club
 INSERT INTO beneficios_club (nivel, nombre_beneficio, descripcion, puntos_requeridos, descuento_porcentaje, servicio_gratuito, activo) VALUES 
