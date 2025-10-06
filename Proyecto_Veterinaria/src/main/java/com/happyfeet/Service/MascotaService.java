@@ -35,9 +35,6 @@ public class MascotaService {
             return mascotaDAO.agregarMascota(mascota);
         }
 
-        /**
-         * Obtiene una mascota por su ID
-         */
         public Mascota obtenerMascota(int id) {
             validarIdPositivo(id, "mascota");
             return mascotaDAO.buscarMascotaPorId(id);

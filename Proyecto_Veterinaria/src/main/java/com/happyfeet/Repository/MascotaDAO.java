@@ -8,13 +8,14 @@ import com.happyfeet.model.enums.SexoMascota;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MascotaDAO implements IMascotaDAO {
         @Override
         public List<Mascota> listarMacota() {
             List<Mascota> mascotas = new ArrayList<>();
             String sql;
-            sql = "SELECT * FROM mascotas ORDER BY id";
+            sql = "SELECT * FROM mascotas ORDER BY fecha_registro asc";
 
             try (Connection con = DatabaseConfig.getConexion();
                  PreparedStatement ps = con.prepareStatement(sql);
@@ -52,11 +53,11 @@ public class MascotaDAO implements IMascotaDAO {
             return null;
         }
 
-        @Override
+    @Override
         public boolean agregarMascota(Mascota mascota) {
             String sql;
-            sql = "INSERT INTO mascotas(dueno_id, nombre, raza_id, fecha_nacimiento, sexo, url_foto) " +
-                    "VALUES(?, ?, ?, ?, ?, ?)";
+            sql = "INSERT INTO mascotas(dueno_id, nombre, raza_id, fecha_nacimiento, sexo, peso_actual, microchip, tatuaje, url_foto, alergias, condiciones_preexistentes) " +
+                    "VALUES(?, ?, ?, ?, ?, ?,?,?, ?, ?,?)";
 
             try (Connection con = DatabaseConfig.getConexion();
                  PreparedStatement ps = con.prepareStatement(sql)) {
@@ -66,7 +67,12 @@ public class MascotaDAO implements IMascotaDAO {
                 ps.setInt(3, mascota.getRaza_id());
                 ps.setDate(4, Date.valueOf(mascota.getFecha_nacimiento()));
                 ps.setString(5, mascota.getSexo().toString());
-                ps.setString(6, mascota.getUrl_foto());
+                ps.setDouble(6, mascota.getPeso_actual());
+                ps.setString(7, mascota.getMicrochip());
+                ps.setString(8, mascota.getTatuaje());
+                ps.setString(9, mascota.getUrl_foto());
+                ps.setString(10, mascota.getAlergias());
+                ps.setString(11, mascota.getCondiciones_preexistentes());
 
                 int filasAfectadas = ps.executeUpdate();
                 return filasAfectadas > 0;
@@ -81,7 +87,7 @@ public class MascotaDAO implements IMascotaDAO {
         @Override
         public boolean modificarMascota(Mascota mascota) {
             String sql;
-            sql = "UPDATE mascotas SET dueno_id = ?, nombre = ?, raza_id = ?, fecha_nacimiento = ?, sexo = ?, url_foto = ? WHERE id = ?";
+            sql = "UPDATE mascotas SET dueno_id = ?, nombre = ?, raza_id = ?, fecha_nacimiento = ?, sexo = ?,peso_actual = ?, microchip =?, tatuaje =?, url_foto =?, alergias =?, condiciones_preexistentes =? WHERE id = ?";
 
             try (Connection con = DatabaseConfig.getConexion();
                  PreparedStatement ps = con.prepareStatement(sql)) {
@@ -91,8 +97,13 @@ public class MascotaDAO implements IMascotaDAO {
                 ps.setInt(3, mascota.getRaza_id());
                 ps.setDate(4, Date.valueOf(mascota.getFecha_nacimiento()));
                 ps.setString(5, mascota.getSexo().toString());
-                ps.setString(6, mascota.getUrl_foto());
-                ps.setInt(7, mascota.getId());
+                ps.setDouble(6, mascota.getPeso_actual());
+                ps.setString(7, mascota.getMicrochip());
+                ps.setString(8, mascota.getTatuaje());
+                ps.setString(9, mascota.getUrl_foto());
+                ps.setString(10, mascota.getAlergias());
+                ps.setString(11, mascota.getCondiciones_preexistentes());
+                ps.setInt(12, mascota.getId());
 
                 int filasAfectadas = ps.executeUpdate();
                 return filasAfectadas > 0;
@@ -108,7 +119,7 @@ public class MascotaDAO implements IMascotaDAO {
         public List<Mascota> listarMascotasPorDueno(int duenoId) {
             List<Mascota> mascotas = new ArrayList<>();
             String sql;
-            sql = "SELECT * FROM mascotas WHERE dueno_id = ? ORDER BY nombre";
+            sql = "SELECT * FROM mascotas WHERE dueno_id = ? ORDER BY fecha_registro";
 
             try (Connection con = DatabaseConfig.getConexion();
                  PreparedStatement ps = con.prepareStatement(sql)) {
@@ -156,8 +167,14 @@ public class MascotaDAO implements IMascotaDAO {
             mascota.setRaza_id(rs.getInt("raza_id"));
             mascota.setFecha_nacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
             mascota.setSexo(SexoMascota.Sexo.fromString(rs.getString("sexo")));
-            mascota.setUrl_foto(rs.getString("url_foto"));
+            mascota.setPeso_actual(rs.getDouble("peso_actual"));
+            mascota.setMicrochip(rs.getString("microchip"));
+            mascota.setTatuaje(rs.getString("tatuaje"));
+            mascota.setUrl_foto(rs.getString  ("url_foto"));
+            mascota.setAlergias(rs.getString("alergias"));
+            mascota.setCondiciones_preexistentes(rs.getString("condiciones_preexistentes"));
             return mascota;
         }
     }
+
 

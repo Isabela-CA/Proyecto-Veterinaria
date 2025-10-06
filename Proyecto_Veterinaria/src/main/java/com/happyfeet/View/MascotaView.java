@@ -9,10 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-/**
- * Vista para gestión de mascotas
- * Migrado a Java 17
- */
+
 public class MascotaView {
 
     private final MascotaController mascotaController;
@@ -79,11 +76,31 @@ public class MascotaView {
             String sexoStr = scanner.nextLine();
             var sexo = SexoMascota.Sexo.fromString(sexoStr);
 
-            System.out.print("Ingrese URL de foto (opcional): ");
-            String urlFoto = scanner.nextLine();
+            System.out.print("ingrese el peso actual: ");
+            double peso = scanner.nextDouble();
+            scanner.nextLine();
+
+            System.out.print("ingrese el microchip: ");
+            String microchip = scanner.nextLine();
+
+            System.out.print("ingrese tatuaje: ");
+            String tatuaje = scanner.nextLine();
+
+            System.out.print("ingrese url de la foto: ");
+            String url_foto = scanner.nextLine();
+
+            System.out.print("ingrese las alergias que tiene la mascota: ");
+            String alergias = scanner.nextLine();
+
+            System.out.print("ingrese las condiciones preexistentes: ");
+            String condiciones_preexistentes = scanner.nextLine();
+
+
 
             var mascota = new Mascota(duenoId, nombre, razaId, fechaNacimiento, sexo,
-                    urlFoto.isBlank() ? null : urlFoto);
+                     peso, microchip.isBlank() ? null:microchip , tatuaje.isBlank() ? null:tatuaje ,
+                    url_foto.isBlank() ? null : url_foto, alergias.isBlank() ? null : alergias,
+                    condiciones_preexistentes.isBlank() ? null : condiciones_preexistentes);
 
             if (mascotaController.agregarMascota(mascota)) {
                 System.out.println("Mascota registrada correctamente");
@@ -96,6 +113,7 @@ public class MascotaView {
             System.out.println("Error de validación: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error inesperado: " + e.getMessage());
+            scanner.nextLine(); // Limpiar buffer
         }
     }
 
@@ -111,7 +129,13 @@ public class MascotaView {
                             m.getId(),
                             m.getNombre(),
                             m.getDueno_id(),
-                            m.getSexo()
+                            m.getSexo(),
+                            m.getRaza_id(),
+                            m.getPeso_actual(),
+                            m.getMicrochip(),
+                            m.getTatuaje(),
+                            m.getAlergias(),
+                            m.getCondiciones_preexistentes()
                     )
             ));
         }
@@ -150,7 +174,12 @@ public class MascotaView {
                         "- %s (%s) - Raza ID: %d".formatted(
                                 m.getNombre(),
                                 m.getSexo(),
-                                m.getRaza_id()
+                                m.getRaza_id(),
+                                m.getPeso_actual(),
+                                m.getMicrochip(),
+                                m.getTatuaje(),
+                                m.getAlergias(),
+                                m.getCondiciones_preexistentes()
                         )
                 ));
             }
@@ -216,25 +245,35 @@ public class MascotaView {
 
     private void mostrarDetalleMascota(Mascota mascota) {
         System.out.println("""
-            ╔════════════════════════════════════════╗
-            ║       INFORMACIÓN DE LA MASCOTA        ║
-            ╠════════════════════════════════════════╣
-            ║ ID: %d
-            ║ Nombre: %s
-            ║ Dueño ID: %d
-            ║ Raza ID: %d
-            ║ Fecha de Nacimiento: %s
-            ║ Sexo: %s
-            ║ URL Foto: %s
-            ╚════════════════════════════════════════╝
-            """.formatted(
+        ╔════════════════════════════════════════╗
+        ║       INFORMACIÓN DE LA MASCOTA        ║
+        ╠════════════════════════════════════════╣
+        ║ ID: %d
+        ║ Nombre: %s
+        ║ Dueño ID: %d
+        ║ Raza ID: %d
+        ║ Fecha de Nacimiento: %s
+        ║ Sexo: %s
+        ║ Peso Actual: %.2f kg
+        ║ Microchip: %s
+        ║ Tatuaje: %s
+        ║ URL Foto: %s
+        ║ Alergias: %s
+        ║ Condiciones Preexistentes: %s
+        ╚════════════════════════════════════════╝
+        """.formatted(
                 mascota.getId(),
                 mascota.getNombre(),
                 mascota.getDueno_id(),
                 mascota.getRaza_id(),
                 mascota.getFecha_nacimiento(),
                 mascota.getSexo(),
-                mascota.getUrl_foto() != null ? mascota.getUrl_foto() : "Sin foto"
+                mascota.getPeso_actual(),
+                mascota.getMicrochip() != null ? mascota.getMicrochip() : "No registrado",
+                mascota.getTatuaje() != null ? mascota.getTatuaje() : "No registrado",
+                mascota.getUrl_foto() != null ? mascota.getUrl_foto() : "Sin foto",
+                mascota.getAlergias() != null ? mascota.getAlergias() : "Ninguna",
+                mascota.getCondiciones_preexistentes() != null ? mascota.getCondiciones_preexistentes() : "Ninguna"
         ));
     }
 }
