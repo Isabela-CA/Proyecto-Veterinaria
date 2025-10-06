@@ -1,189 +1,339 @@
-insert into especies (nombre) 
-values ('Perro'),('Gato'),('Ave'),('Roedor');
-
-insert into razas (especie_id, nombre) 
-values (1, 'Pastor Aleman'),
-(2, 'Siames'),
-(3, 'Cacatua'),
-(4, 'Hámster Sirio');
-
-INSERT INTO producto_tipos (nombre) VALUES 
-('Medicamento'), ('Vacuna'), ('Insumo Médico'),('Alimento');
-
-INSERT INTO evento_tipos (nombre) VALUES 
-('Consulta'),('Vacunación'),('Cirugía'),('Desparasitación'),('Urgencia'),('Control');
-
-INSERT INTO cita_estados (nombre) VALUES 
-('Programada'),('Confirmada'),('En Proceso'),('Finalizada'),('Cancelada'),('No Asistió');
-
-INSERT INTO duenos (nombre_completo, documento_identidad, direccion, telefono, email, contacto_emergencia) VALUES 
-('Carlos Rodríguez López', '87654321', 'Av. Principal #89-12, Medellín', '310-7654321', 'carlos.rodriguez@gmail.com', 3001234567),
-('Ana Martínez Silva', '11223344', 'Carrera 56 #78-90, Cali', '320-5566778', 'ana.martinez@email.com', 3107654321),
-('Pedro Hernández Díaz', 'C55667788', 'Diagonal 34 #12-34, Barranquilla', '615-8899223', 'pedro.hernandez@email.com', NULL),
-('Laura García Castro', 'CC-99887766', 'Transversal 78 #56-12, Cartagena', '318-3344556', 'laura.garcia@email.com', 3158899223),
-('Javier López Ramírez', 'CC-44332211', 'Calle 90 #67-45, Bucaramanga', '301-7788990', 'javier.lopez@email.com', 3183344556),
-('Sofía Torres Méndez', 'CC-66778899', 'Av. Siempre Viva #123, Pereira', '317-1122334', 'sofia.torres@email.com', NULL),
-('Diego Sánchez Ruiz', 'CC-22334455', 'Carrera 11 #22-33, Manizales', '319-4455667', 'diego.sanchez@email.com', 3171122334),
-('Valentina Díaz Herrera', 'CC-33445566', 'Calle 80 #45-67, Ibagué', '312-6677889', 'valentina.diaz@email.com', 3194455667),
-('Miguel Ángel Castro Ortiz', 'CC-77889900', 'Diagonal 25 #38-49, Villavicencio', '314-9900112', 'miguel.castro@email.com', NULL);
-
-INSERT INTO mascotas (dueno_id, nombre, raza_id, fecha_nacimiento, sexo, url_foto) VALUES 
-(1, 'Max', 10, '2025-03-15', 'Macho', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQbOl2_ExwSUO-tRMGf2t55t7ZHTYJUGJyuQ&s'),
-(2, 'Luna', 11, '2025-07-20', 'Hembra', NULL),
-(3, 'Mimi', 12, '2025-01-30', 'Hembra', NULL),
-(4, 'Nala', 13, '2025-12-12', 'Macho', 'https://content.elmueble.com/medio/2022/06/09/hamster_ebe1fa86_1280x847.jpg'),
-(5, 'Simba', 10, '2024-04-20', 'Macho', NULL),
-(6, 'Lola', 12, '2024-03-08', 'Hembra', NULL),
-(7, 'Thor', 13, '2014-12-25', 'Macho', NULL),
-(8, 'Bella', 11, '2024-08-15', 'Hembra', NULL),
-(9, 'Jack', 11, '2024-10-10', 'Macho', NULL);
+INSERT INTO especies (nombre, descripcion) VALUES
+('Perro', 'Canis lupus familiaris'),
+('Gato', 'Felis catus'),
+('Ave', 'Aves domésticas'),
+('Roedor', 'Pequeños mamíferos roedores'),
+('Reptil', 'Reptiles domésticos'),
+('Conejo', 'Oryctolagus cuniculus'),
+('Hurón', 'Mustela putorius furo'),
+('Pez', 'Peces ornamentales');
 
 
-INSERT INTO inventario (nombre_producto, producto_tipo_id, descripcion, fabricante, lote, cantidad_stock, stock_minimo, fecha_vencimiento, precio_venta) VALUES 
-('Amoxicilina 500mg', 1, 'Antibiótico de amplio espectro', 'Pfizer', 'LOT-AMX-2024A', 50, 10, '2025-12-31', 25.00),
-('Ivermectina 1%', 1, 'Antiparasitario interno y externo', 'Bayer', 'LOT-IVM-2024B', 30, 5, '2025-10-15', 18.50),
-('Carprofeno 50mg', 1, 'Antiinflamatorio para dolor articular', 'Zoetis', 'LOT-CARP-2024C', 25, 8, '2025-11-30', 32.75),
-('Dexametasona 0.5mg', 1, 'Corticoesteroide antiinflamatorio', 'Virbac', 'LOT-DEX-2024D', 40, 12, '2025-09-20', 15.80),
-('Vacuna Antirrábica', 2, 'Vacuna contra la rabia', 'Merial', 'LOT-RAB-2024E', 100, 20, '2024-12-31', 45.00),
-('Vacuna Polivalente', 2, 'Vacuna múltiple para perros', 'Zoetis', 'LOT-POLI-2024F', 80, 15, '2024-11-30', 60.00),
-('Vacuna Triple Felina', 2, 'Vacuna para gatos contra panleucopenia, calicivirus y rinotraqueitis', 'Bayer', 'LOT-TRFEL-2024G', 60, 10, '2024-10-15', 55.50),
-('Jeringa 3ml', 3, 'Jeringa desechable estéril', 'BD', 'LOT-JER-2026A', 200, 50, '2026-05-31', 0.80),
-('Gasas Estériles 10x10', 3, 'Paquete de 10 gasas estériles', 'Curitas', 'LOT-GAS-2026B', 150, 30, '2026-08-15', 5.25),
-('Guantes Latex Talla M', 3, 'Caja de 100 guantes estériles', 'Ansell', 'LOT-GUA-2026C', 20, 5, '2026-12-31', 12.00),
-('Sutura Nylon 3-0', 3, 'Hilo de sutura no absorbible', 'Ethicon', 'LOT-SUT-2026D', 50, 15, '2026-03-20', 8.75),
-('Royal Canin Medium Adult', 4, 'Alimento para perros medianos adultos', 'Royal Canin', 'LOT-RC-2025H', 30, 8, '2025-06-30', 85.00),
-('Hills Science Diet Gato Adulto', 4, 'Alimento balanceado para gatos adultos', 'Hills', 'LOT-HILLS-2025I', 25, 6, '2025-07-15', 92.50),
-('Purina ProPlan Puppy', 4, 'Alimento para cachorros', 'Purina', 'LOT-PURINA-2025J', 40, 10, '2025-08-20', 78.00),
-('Eukanuba Razas Pequeñas', 4, 'Alimento específico para razas pequeñas', 'Eukanuba', 'LOT-EUK-2025K', 20, 5, '2025-09-10', 88.00);
+-- Razas (50 registros)
+INSERT INTO razas (especie_id, nombre, caracteristicas) VALUES
+(1, 'Labrador Retriever', 'Tamaño grande, amigable, energético'),
+(1, 'Golden Retriever', 'Tamaño grande, inteligente, leal'),
+(1, 'Pastor Alemán', 'Tamaño grande, inteligente, protector'),
+(1, 'Bulldog Francés', 'Tamaño pequeño, cariñoso, juguetón'),
+(1, 'Chihuahua', 'Tamaño muy pequeño, alerta, valiente'),
+(1, 'Poodle', 'Inteligente, hipoalergénico'),
+(1, 'Beagle', 'Mediano, cazador, amigable'),
+(1, 'Yorkshire Terrier', 'Pequeño, valiente, cariñoso'),
+(1, 'Husky Siberiano', 'Grande, energético, resistente al frío'),
+(1, 'Dálmata', 'Grande, manchado, activo'),
+(1, 'Boxer', 'Mediano-grande, juguetón, protector'),
+(1, 'Rottweiler', 'Grande, leal, guardián'),
+(1, 'Schnauzer', 'Mediano, alerta, inteligente'),
+(1, 'Shih Tzu', 'Pequeño, pelaje largo, amigable'),
+(1, 'Mestizo', 'Cruza de razas, características variadas'),
+(2, 'Persa', 'Pelo largo, tranquilo, aristocrático'),
+(2, 'Siamés', 'Vocal, social, activo'),
+(2, 'Maine Coon', 'Grande, peludo, amigable'),
+(2, 'Bengalí', 'Activo, manchas de leopardo'),
+(2, 'Británico de Pelo Corto', 'Robusto, tranquilo, independiente'),
+(2, 'Sphynx', 'Sin pelo, cariñoso, cálido al tacto'),
+(2, 'Ragdoll', 'Grande, dócil, relajado'),
+(2, 'Abisinio', 'Atlético, curioso, juguetón'),
+(2, 'Scottish Fold', 'Orejas plegadas, dulce, tranquilo'),
+(2, 'Mestizo', 'Cruza de razas, características variadas'),
+(3, 'Canario', 'Pequeño, cantante, amarillo'),
+(3, 'Periquito', 'Pequeño, social, colorido'),
+(3, 'Loro Amazonas', 'Mediano, inteligente, longevo'),
+(3, 'Cacatúa', 'Grande, cariñosa, ruidosa'),
+(3, 'Agapornis', 'Pequeño, afectuoso, colorido'),
+(3, 'Guacamayo', 'Grande, colorido, inteligente'),
+(3, 'Ninfa', 'Mediana, cresta, amigable'),
+(4, 'Hámster Sirio', 'Pequeño, nocturno, solitario'),
+(4, 'Hámster Ruso', 'Muy pequeño, social'),
+(4, 'Cobayo', 'Mediano, social, vocal'),
+(4, 'Jerbo', 'Pequeño, saltarín, nocturno'),
+(4, 'Chinchilla', 'Mediano, suave, nocturno'),
+(5, 'Iguana Verde', 'Herbívoro, grande, arbóreo'),
+(5, 'Tortuga de Orejas Rojas', 'Acuática, mediana, longeva'),
+(5, 'Gecko Leopardo', 'Pequeño, nocturno, fácil cuidado'),
+(5, 'Camaleón', 'Mediano, cambia de color, insectívoro'),
+(5, 'Serpiente del Maíz', 'Mediana, dócil, colorida'),
+(6, 'Conejo Enano', 'Pequeño, dócil, orejas cortas'),
+(6, 'Conejo Gigante', 'Grande, tranquilo, orejas largas'),
+(6, 'Conejo Belier', 'Mediano, orejas caídas, afectuoso'),
+(6, 'Conejo Angora', 'Pelo largo, requiere aseo frecuente'),
+(7, 'Hurón Estándar', 'Juguetón, curioso, carnívoro'),
+(7, 'Hurón Angora', 'Pelo largo, juguetón'),
+(8, 'Goldfish', 'Agua fría, resistente, dorado'),
+(8, 'Betta', 'Tropical, colorido, territorial');
 
-INSERT INTO veterinarios (documento_identidad, nombre_completo, especialidad, telefono, email, fecha_contratacion, activo) VALUES 
-('VET-001', 'Dra. María Alejandra González', 'General', '300-1112233', 'maria.gonzalez@happyfeet.com', '2025-01-15', TRUE),
-('VET-002', 'Dr. Carlos Eduardo Rodríguez', 'Cirugia', '300-4455667', 'carlos.rodriguez@happyfeet.com', '2025-03-20', TRUE),
-('VET-003', 'Dra. Ana Patricia López', 'Dermatologia', '300-7788990', 'ana.lopez@happyfeet.com', '2025-01-10', TRUE),
-('VET-004', 'Dr. Javier Andrés Martínez', 'Cardiologia', '300-1122334', 'javier.martinez@happyfeet.com', '2025-06-01', TRUE),
-('VET-005', 'Dra. Sofia Isabel Ramírez', 'Oftalmologia', '300-5566778', 'sofia.ramirez@happyfeet.com', '2024-02-14', TRUE),
-('VET-006', 'Dr. Miguel Ángel Torres', 'Odontologia', '300-9900112', 'miguel.torres@happyfeet.com', '2024-03-10', TRUE);
-
-
-INSERT INTO citas (mascota_id, veterinario_id, fecha_hora, motivo, estado_id) VALUES 
--- Citas programadas
-(1, 1, '2025-09-25 09:00:00', 'Consulta de rutina anual', 1),
--- Citas confirmadas
-(2, 4, '2025-09-26 14:00:00', 'Control cardíaco', 2),
--- Citas en proceso
-(3, 5, '2025-09-24 15:30:00', 'Problemas oculares', 3),
--- Citas finalizadas
-(4, 2, '2025-09-22 09:00:00', 'Consulta por vómitos', 4),
--- Citas canceladas
-(5, 3, '2025-09-27 16:00:00', 'Control dermatológico', 5);
-
-INSERT INTO historial_medico (mascota_id, veterinario_id, fecha_evento, evento_tipo_id, descripcion, diagnostico, tratamiento_recomendado, producto_id, cantidad_utilizada) VALUES 
--- Consultas - usando medicamentos básicos para chequeos
-(1, 1, '2025-09-23', 1, 'Control anual de salud. Mascota en buen estado general', 'Salud óptima', 'Vacunación anual pendiente. Mantener dieta actual', 1, 1), -- Amoxicilina como preventivo
-
--- Vacunaciones - usando vacunas del inventario
-(2, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente y antirrábica', 'Vacunación completa', 'Próxima vacunación en 1 año', 5, 1), -- Vacuna Antirrábica
-(3, 1, '2025-09-20', 2, 'Aplicación de vacuna polivalente', 'Vacunación completa', 'Próxima vacunación en 1 año', 6, 1), -- Vacuna Polivalente
-
--- Cirugías - usando material quirúrgico
-(4, 2, '2025-08-15', 3, 'Esterilización rutinaria. Procedimiento sin complicaciones', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días. Control de sutura', 11, 3), -- Sutura Nylon 3-0
-(5, 2, '2025-08-15', 3, 'Material para cirugía', 'Recuperación post-quirúrgica normal', 'Reposo por 10 días', 9, 5), -- Gasas Estériles
-
--- Desparasitaciones - usando antiparasitario
-(5, 1, '2025-09-10', 4, 'Desparasitación interna y externa', 'Prevención parasitaria', 'Repetir en 3 meses', 2, 1), -- Ivermectina 1%
-
--- Urgencias - usando antiinflamatorio para alergia
-(6, 3, '2025-09-05', 5, 'Consulta urgente por alergia cutánea severa', 'Dermatitis alérgica', 'Antihistamínicos por 7 días. Dieta hipoalergénica', 4, 2), -- Dexametasona
-
--- Controles cardíacos - usando antiinflamatorio para el corazón
-(7, 4, '2025-08-30', 6, 'Control cardíaco rutinario', 'Soplo cardíaco grado I', 'Control cada 6 meses. Restringir ejercicio intenso', 3, 1), -- Carprofeno
-
--- Control oftalmológico - usando antinflamatorio ocular
-(7, 5, '2025-09-12', 6, 'Control oftalmológico anual', 'Catarata incipiente', 'Control en 1 año. Suplementos oculares', 4, 1);
-
-
-INSERT INTO facturas (dueno_id, fecha_emision, total) VALUES 
-(1, '2025-09-23 11:45:00', 85.50),
-(2, '2025-09-20 12:30:00', 150.25),
-(3, '2025-09-18 16:20:00', 45.00),
-(4, '2025-09-15 10:15:00', 220.75),
-(4, '2025-09-10 14:40:00', 95.00);
-
-INSERT INTO items_factura (factura_id, producto_id, servicio_descripcion, cantidad, precio_unitario, subtotal) VALUES 
-(200, NULL, 'Consulta general', 1, 30.00, 30.00),
-(201, 5, 'Vacuna Antirrábica', 1, 45.00, 45.00),
-(202, NULL, 'Cirugía de esterilización', 1, 120.00, 120.00),
-(203, 1, 'Amoxicilina 500mg', 2, 25.00, 50.00),
-(204, 9, 'Gasas Estériles', 1, 5.25, 5.25),
-(202, 10, 'Guantes Latex', 1, 12.00, 12.00),
-(201, NULL, 'Consulta dermatológico', 1, 35.00, 35.00),
-(201, 2, 'Ivermectina 1%', 1, 18.50, 18.50),
-(203, 3, 'Carprofeno 50mg', 2, 32.75, 65.50),
-(204, 4, 'Dexametasona 0.5mg', 1, 15.80, 15.80);
+-- Tipos de productos
+INSERT INTO producto_tipos (nombre, descripcion) VALUES
+('Medicamento', 'Fármacos y medicinas veterinarias'),
+('Vacuna', 'Vacunas y biológicos'),
+('Insumo Médico', 'Material médico y quirúrgico'),
+('Alimento', 'Alimento para mascotas'),
+('Accesorio', 'Accesorios y productos de cuidado'),
+('Suplemento', 'Vitaminas y suplementos nutricionales'),
+('Antiparasitario', 'Productos contra parásitos'),
+('Desinfectante', 'Productos de limpieza y desinfección');
 
 
-INSERT INTO procedimientos_quirurgicos (mascota_id, veterinario_id, fecha_procedimiento,tipo_procedimiento, diagnostico, 
-    descripcion_procedimiento, anestesia_utilizada, medicacion_prescrita, cuidados_recomendados, resultado) 
-    VALUES (
-     1, 2, '2025-01-15 10:00:00',
-    'Esterilización', 'Control poblacional - paciente sana',
-    'Ovariohisterectomía rutinaria sin complicaciones',
-    'Isoflurano', 'Analgésico por 3 días, antibiótico por 5 días',
-    'Reposo 10 días, control de herida, evitar lamido', 'EXITOSO'
-);
+-- Tipos de eventos médicos
+INSERT INTO evento_tipos (nombre, descripcion) VALUES
+('Vacunación', 'Aplicación de vacunas'),
+('Consulta General', 'Consulta veterinaria general'),
+('Cirugía', 'Procedimiento quirúrgico'),
+('Desparasitación', 'Tratamiento antiparasitario'),
+('Control de Peso', 'Seguimiento de peso'),
+('Examen de Sangre', 'Análisis de laboratorio'),
+('Radiografía', 'Estudio de imagen'),
+('Emergencia', 'Atención de emergencia'),
+('Limpieza Dental', 'Profilaxis dental'),
+('Ecografía', 'Estudio de ultrasonido'),
+('Castración', 'Cirugía de esterilización'),
+('Hospitalización', 'Internación de mascota');
+
+-- Estados de citas
+INSERT INTO cita_estados (nombre, descripcion) VALUES
+('Programada', 'Cita agendada pendiente'),
+('Confirmada', 'Cita confirmada por el cliente'),
+('En Proceso', 'Mascota siendo atendida'),
+('Finalizada', 'Cita completada'),
+('Cancelada', 'Cita cancelada'),
+('No Asistió', 'Cliente no se presentó');
 
 
--- =========== MÓDULO 5: ACTIVIDADES ESPECIALES ===========
 
--- 1. Mascotas en adopción
-INSERT INTO mascotas_adopcion (mascota_id, fecha_ingreso, descripcion, estado, observaciones, fecha_adopcion, adoptante_id) VALUES 
-(1, '2025-08-10', 'Labrador mezcla, 2 años, juguetón y bueno con niños', 'DISPONIBLE', 'Esterilizado y vacunado', NULL, NULL),
-(2, '2025-05-01', 'Gato común europeo, 1 año, tranquilo y cariñoso', 'DISPONIBLE', 'Desparasitado, busca hogar tranquilo', NULL, NULL),
-(3, '2025-07-15', 'Cachorro mestizo, 4 meses, energía alta', 'EN_PROCESO', 'En evaluación con familia candidata', NULL, NULL),
-(5, '2025-06-20', 'Perra adulta, 3 años, calmada y obediente', 'ADOPTADA', 'Excelente adaptación', '2025-08-05', 1),
-(4, '2025-05-30', 'Gato siamés, 2 años, requiere atención especial', 'ADOPTADA', 'Adoptado por familia experimentada', '2025-07-12', 3);
+INSERT INTO duenos (nombre_completo, documento_identidad, direccion, telefono, email, contacto_emergencia) VALUES
+('María González Pérez', '12345678A', 'Calle Primavera 123, Madrid', '611111111', 'maria.gonzalez@email.com', 'Juan González - 622222222'),
+('Carlos Rodríguez López', '23456789B', 'Av. Libertad 45, Barcelona', '622222222', 'carlos.rodriguez@email.com', 'Ana Rodríguez - 633333333'),
+('Ana Martínez Sánchez', '34567890C', 'Plaza Mayor 67, Valencia', '633333333', 'ana.martinez@email.com', 'Luis Martínez - 644444444'),
+('Javier Fernández García', '45678901D', 'Calle Sol 89, Sevilla', '644444444', 'javier.fernandez@email.com', 'Marta Fernández - 655555555'),
+('Laura Díaz Romero', '56789012E', 'Gran Vía 12, Zaragoza', '655555555', 'laura.diaz@email.com', 'Pedro Díaz - 666666666'),
+('Miguel Ángel Torres Ruiz', '67890123F', 'Calle Luna 34, Málaga', '666666666', 'miguel.torres@email.com', 'Sofia Torres - 677777777'),
+('Elena Castro Méndez', '78901234G', 'Av. Constitución 56, Murcia', '677777777', 'elena.castro@email.com', 'David Castro - 688888888'),
+('David Jiménez Navarro', '89012345H', 'Paseo Marítimo 78, Palma', '688888888', 'david.jimenez@email.com', 'Eva Jiménez - 699999999'),
+('Sofia Herrera Molina', '90123456I', 'Calle Real 90, Bilbao', '699999999', 'sofia.herrera@email.com', 'Carlos Herrera - 700000000'),
+('Pablo Ortega Silva', '01234567J', 'Plaza España 23, Alicante', '700000000', 'pablo.ortega@email.com', 'Laura Ortega - 711111111'),
+('Isabel Vargas Cruz', '11223344K', 'Calle Nueva 45, Córdoba', '711111111', 'isabel.vargas@email.com', 'Miguel Vargas - 722222222'),
+('Ricardo Mendoza León', '22334455L', 'Av. Central 67, Valladolid', '722222222', 'ricardo.mendoza@email.com', 'Carmen Mendoza - 733333333'),
+('Carmen Ríos Vega', '33445566M', 'Calle Alta 89, Vigo', '733333333', 'carmen.rios@email.com', 'Javier Ríos - 744444444'),
+('Alejandro Soto Marín', '44556677N', 'Paseo del Parque 12, Gijón', '744444444', 'alejandro.soto@email.com', 'Patricia Soto - 755555555'),
+('Patricia Núñez Guerrero', '55667788O', 'Calle Baja 34, Hospitalet', '755555555', 'patricia.nunez@email.com', 'Alejandro Núñez - 766666666'),
+('Roberto Delgado Flores', '66778899P', 'Av. América 56, A Coruña', '766666666', 'roberto.delgado@email.com', 'Isabel Delgado - 777777777'),
+('Mónica Paredes Rojas', '77889900Q', 'Plaza Nueva 78, Vitoria', '777777777', 'monica.paredes@email.com', 'Roberto Paredes - 788888888'),
+('Fernando Reyes Campos', '88990011R', 'Calle Ancha 90, Granada', '788888888', 'fernando.reyes@email.com', 'Mónica Reyes - 799999999'),
+('Lucía Mora Fuentes', '99001122S', 'Paseo de la Estación 23, Elche', '799999999', 'lucia.mora@email.com', 'Fernando Mora - 800000000'),
+('Gabriel Peña Medina', '00112233T', 'Av. Universidad 45, Oviedo', '800000000', 'gabriel.pena@email.com', 'Lucía Peña - 811111111'),
+('Raquel Sandoval Cortés', '44556699U', 'Calle del Mar 67, Badalona', '811111111', 'raquel.sandoval@email.com', 'Gabriel Sandoval - 822222222'),
+('Héctor Guzmán Pacheco', '55667700V', 'Plaza del Sol 89, Cartagena', '822222222', 'hector.guzman@email.com', 'Raquel Guzmán - 833333333'),
+('Adriana Cervantes Ochoa', '66778811W', 'Av. de la Paz 12, Terrassa', '833333333', 'adriana.cervantes@email.com', 'Héctor Cervantes - 844444444'),
+('Mario Salazar Lozano', '77889922X', 'Calle Jardín 34, Jerez', '844444444', 'mario.salazar@email.com', 'Adriana Salazar - 855555555'),
+('Daniela Montoya Rangel', '88990033Y', 'Paseo de la Fuente 56, Sabadell', '855555555', 'daniela.montoya@email.com', 'Mario Montoya - 866666666'),
+('José Luis Figueroa Mejía', '99004455Z', 'Av. Libertador 78, Móstoles', '866666666', 'jose.figueroa@email.com', 'Daniela Figueroa - 877777777'),
+('Valeria Serrano Acosta', '11225566AA', 'Calle Real 90, Alcalá de Henares', '877777777', 'valeria.serrano@email.com', 'José Luis Serrano - 888888888'),
+('Andrés Rojas Valencia', '22336677BB', 'Plaza de la Villa 23, Fuenlabrada', '888888888', 'andres.rojas@email.com', 'Valeria Rojas - 899999999'),
+('Natalia Medina Salas', '33447788CC', 'Av. de Europa 45, Leganés', '899999999', 'natalia.medina@email.com', 'Andrés Medina - 900000000'),
+('Diego Cabrera Miranda', '44558899DD', 'Calle del Prado 67, Getafe', '900000000', 'diego.cabrera@email.com', 'Natalia Cabrera - 911111111'),
+('Verónica Aguilar Ponce', '55669900EE', 'Paseo de la Castellana 89, Alcorcón', '911111111', 'veronica.aguilar@email.com', 'Diego Aguilar - 922222222'),
+('Sergio Vega Montes', '66770011FF', 'Av. de la Albufera 12, Santander', '922222222', 'sergio.vega@email.com', 'Verónica Vega - 933333333'),
+('Paola Correa Franco', '77881122GG', 'Calle Mayor 34, Burgos', '933333333', 'paola.correa@email.com', 'Sergio Correa - 944444444'),
+('Jorge Contreras Gil', '88992233HH', 'Plaza del Ayuntamiento 56, Salamanca', '944444444', 'jorge.contreras@email.com', 'Paola Contreras - 955555555'),
+('Camila Santana Carrillo', '99003344II', 'Av. de la Victoria 78, Albacete', '955555555', 'camila.santana@email.com', 'Jorge Santana - 966666666'),
+('Francisco Javier Luna Márquez', '11224455JJ', 'Calle San Francisco 90, Castellón', '966666666', 'francisco.luna@email.com', 'Camila Luna - 977777777'),
+('Alicia Solís Ríos', '22335566KK', 'Paseo de la Florida 23, Logroño', '977777777', 'alicia.solis@email.com', 'Francisco Solís - 988888888'),
+('Manuel Ibarra Nava', '33446677LL', 'Av. del Cid 45, Badajoz', '988888888', 'manuel.ibarra@email.com', 'Alicia Ibarra - 999999999'),
+('Bianca Velázquez Gallegos', '44557788MM', 'Calle Cervantes 67, Huelva', '999999999', 'bianca.velazquez@email.com', 'Manuel Velázquez - 101010101'),
+('Rodrigo Barrios Téllez', '55668899NN', 'Plaza de Toros 89, Lérida', '101010101', 'rodrigo.barrios@email.com', 'Bianca Barrios - 111111112'),
+('Ximena Osorio Peralta', '66779900OO', 'Av. de la Estación 12, Tarragona', '111111112', 'ximena.osorio@email.com', 'Rodrigo Osorio - 121212121'),
+('Arturo Trejo Cárdenas', '77880011PP', 'Calle del Río 34, Gerona', '121212121', 'arturo.trejo@email.com', 'Ximena Trejo - 131313131'),
+('Renata Bernal Escamilla', '88991122QQ', 'Paseo Marítimo 56, Ceuta', '131313131', 'renata.bernal@email.com', 'Arturo Bernal - 141414141'),
+('Eduardo Zamora Bustos', '99002233RR', 'Av. de la Marina 78, Melilla', '141414141', 'eduardo.zamora@email.com', 'Renata Zamora - 151515151'),
+('Diana Galindo Ávila', '11223355SS', 'Calle Real 90, Pamplona', '151515151', 'diana.galindo@email.com', 'Eduardo Galindo - 161616161'),
+('Raúl Quintero de la Fuente', '22334466TT', 'Plaza del Castillo 23, San Sebastián', '161616161', 'raul.quintero@email.com', 'Diana Quintero - 171717171'),
+('Jimena Casillas Rivas', '33445577UU', 'Av. de la playa 45, Santa Cruz de Tenerife', '171717171', 'jimena.casillas@email.com', 'Raúl Casillas - 181818181'),
+('Óscar Pineda Olvera', '44556688VV', 'Calle del Teide 67, Las Palmas', '181818181', 'oscar.pineda@email.com', 'Jimena Pineda - 191919191'),
+('Ana Karen Arredondo Palacios', '55667799WW', 'Paseo de las Canteras 89, Zaragoza', '191919191', 'karen.arredondo@email.com', 'Óscar Arredondo - 202020202'),
+('Luis Felipe Valdez Rocha', '66778800XX', 'Av. de la Constitución 12, Toledo', '202020202', 'luis.valdez@email.com', 'Karen Valdez - 212121212');
 
--- 2. Club de mascotas frecuentes
-INSERT INTO club_mascotas_frecuentes (dueno_id, fecha_registro, puntos_acumulados, nivel, beneficios_activos) VALUES 
-(1, '2025-05-15', 450, 'PLATA', TRUE),
-(2, '2025-08-20', 780, 'ORO', TRUE),
-(3, '2025-01-10', 120, 'BRONCE', TRUE),
-(4, '2024-11-05', 950, 'DIAMANTE', TRUE),
-(5, '2024-03-22', 65, 'BRONCE', TRUE),
-(6, '2024-12-18', 320, 'PLATA', TRUE);
 
--- 3. Jornadas de vacunación
-INSERT INTO jornadas_vacunacion (fecha_jornada, ubicacion, descripcion, total_mascotas_atendidas) VALUES 
-('2025-05-15', 'Parque Central', 'Jornada de vacunación masiva contra la rabia', 85),
-('2025-06-20', 'Plaza de Mercado', 'Campaña de vacunación y desparasitación', 120),
-('2025-07-05', 'Colegio Nacional', 'Jornada de prevención para mascotas', 100);
+INSERT INTO mascotas (dueno_id, nombre, raza_id, fecha_nacimiento, sexo, peso_actual, microchip, tatuaje, url_foto, alergias, condiciones_preexistentes) VALUES
+(1, 'Max', 1, '2020-03-15', 'Macho', 28.50, 'CHIP001', 'TAT001', '/fotos/max.jpg', 'Polen, picaduras de pulga', 'Ninguna'),
+(2, 'Luna', 2, '2019-07-22', 'Hembra', 25.80, 'CHIP002', 'TAT002', '/fotos/luna.jpg', 'Alimento de maíz', 'Displasia de cadera leve'),
+(3, 'Rocky', 3, '2018-11-10', 'Macho', 32.10, 'CHIP003', 'TAT003', '/fotos/rocky.jpg', 'Ninguna', 'Problemas dermatológicos'),
+(4, 'Bella', 4, '2021-01-30', 'Hembra', 12.50, 'CHIP004', 'TAT004', '/fotos/bella.jpg', 'Lácteos', 'Sobrepeso'),
+(5, 'Simba', 16, '2020-05-14', 'Macho', 5.20, 'CHIP005', 'TAT005', '/fotos/simba.jpg', 'Ninguna', 'Problemas urinarios'),
+(6, 'Nala', 17, '2019-12-03', 'Hembra', 3.80, 'CHIP006', 'TAT006', '/fotos/nala.jpg', 'Ciertos tipos de arena', 'Asma felina'),
+(7, 'Thor', 9, '2017-08-19', 'Macho', 24.30, 'CHIP007', 'TAT007', '/fotos/thor.jpg', 'Picaduras de insectos', 'Alergia alimentaria'),
+(8, 'Kiara', 18, '2020-09-25', 'Hembra', 7.50, 'CHIP008', 'TAT008', '/fotos/kiara.jpg', 'Ninguna', 'Cardiopatía leve'),
+(9, 'Toby', 7, '2019-04-12', 'Macho', 15.20, 'CHIP009', 'TAT009', '/fotos/toby.jpg', 'Polvo doméstico', 'Problemas de oído'),
+(10, 'Molly', 8, '2021-02-28', 'Hembra', 4.10, 'CHIP010', 'TAT010', '/fotos/molly.jpg', 'Ninguna', 'Luxación de rótula'),
+(11, 'Zeus', 10, '2016-11-05', 'Macho', 29.80, 'CHIP011', 'TAT011', '/fotos/zeus.jpg', 'Ciertas hierbas', 'Artritis'),
+(12, 'Daisy', 11, '2020-07-18', 'Hembra', 26.50, 'CHIP012', 'TAT012', '/fotos/daisy.jpg', 'Ninguna', 'Ninguna'),
+(13, 'Bruno', 12, '2018-03-22', 'Macho', 45.20, 'CHIP013', 'TAT013', '/fotos/bruno.jpg', 'Alimentos con colorantes', 'Displasia de codo'),
+(14, 'Lola', 13, '2019-09-14', 'Hembra', 18.70, 'CHIP014', 'TAT014', '/fotos/lola.jpg', 'Ninguna', 'Problemas dentales'),
+(15, 'Charlie', 14, '2020-12-08', 'Macho', 6.80, 'CHIP015', 'TAT015', '/fotos/charlie.jpg', 'Polen', 'Problemas oculares'),
+(16, 'Mia', 19, '2021-04-01', 'Hembra', 4.50, 'CHIP016', 'TAT016', '/fotos/mia.jpg', 'Ninguna', 'Ninguna'),
+(17, 'Cooper', 15, '2017-06-30', 'Macho', 22.30, 'CHIP017', 'TAT017', '/fotos/cooper.jpg', 'Picaduras de pulga', 'Problemas de piel'),
+(18, 'Sasha', 20, '2019-10-11', 'Hembra', 5.10, 'CHIP018', 'TAT018', '/fotos/sasha.jpg', 'Ciertos medicamentos', 'Sobrepeso'),
+(19, 'Buddy', 21, '2018-08-25', 'Macho', 3.20, 'CHIP019', 'TAT019', '/fotos/buddy.jpg', 'Ninguna', 'Problemas respiratorios'),
+(20, 'Ruby', 22, '2020-03-07', 'Hembra', 6.50, 'CHIP020', 'TAT020', '/fotos/ruby.jpg', 'Alimentos secos', 'Ninguna'),
+(21, 'Jack', 23, '2019-01-19', 'Macho', 8.20, 'CHIP021', 'TAT021', '/fotos/jack.jpg', 'Ninguna', 'Problemas articulares'),
+(22, 'Sophie', 24, '2021-06-12', 'Hembra', 4.80, 'CHIP022', 'TAT022', '/fotos/sophie.jpg', 'Productos de limpieza', 'Ninguna'),
+(23, 'Bear', 25, '2017-12-15', 'Macho', 5.60, 'CHIP023', 'TAT023', '/fotos/bear.jpg', 'Ninguna', 'Diabetes'),
+(24, 'Chloe', 26, '2020-11-28', 'Hembra', 0.35, 'CHIP024', NULL, '/fotos/chloe.jpg', 'Semillas específicas', 'Problemas de plumas'),
+(25, 'Rex', 27, '2018-05-03', 'Macho', 0.45, 'CHIP025', NULL, '/fotos/rex.jpg', 'Ninguna', 'Ninguna'),
+(26, 'Zoe', 28, '2019-07-17', 'Hembra', 0.28, 'CHIP026', NULL, '/fotos/zoe.jpg', 'Frutas cítricas', 'Problemas digestivos'),
+(27, 'Oscar', 29, '2020-02-14', 'Macho', 0.15, 'CHIP027', NULL, '/fotos/oscar.jpg', 'Ninguna', 'Ninguna'),
+(28, 'Lucy', 30, '2021-08-09', 'Hembra', 0.32, 'CHIP028', NULL, '/fotos/lucy.jpg', 'Polvo de jaula', 'Problemas respiratorios'),
+(29, 'Milo', 31, '2019-03-26', 'Macho', 0.25, 'CHIP029', NULL, '/fotos/milo.jpg', 'Ninguna', 'Tumor benigno'),
+(30, 'Coco', 32, '2020-10-31', 'Hembra', 0.18, 'CHIP030', NULL, '/fotos/coco.jpg', 'Alimentos húmedos', 'Ninguna'),
+(31, 'Duke', 33, '2018-09-12', 'Macho', 0.42, 'CHIP031', NULL, '/fotos/duke.jpg', 'Ninguna', 'Problemas dentales'),
+(32, 'Stella', 34, '2021-01-07', 'Hembra', 0.55, 'CHIP032', NULL, '/fotos/stella.jpg', 'Ciertas maderas', 'Sobrepeso'),
+(33, 'Tucker', 35, '2019-11-23', 'Macho', 2.80, 'CHIP033', 'TAT033', '/fotos/tucker.jpg', 'Ninguna', 'Problemas de muda'),
+(34, 'Penny', 36, '2020-04-18', 'Hembra', 3.20, 'CHIP034', 'TAT034', '/fotos/penny.jpg', 'Alimentos procesados', 'Ninguna'),
+(35, 'Winston', 37, '2018-07-05', 'Macho', 1.50, 'CHIP035', 'TAT035', '/fotos/winston.jpg', 'Ninguna', 'Problemas de visión'),
+(36, 'Lily', 38, '2021-03-29', 'Hembra', 0.85, 'CHIP036', NULL, '/fotos/lily.jpg', 'Insectos específicos', 'Ninguna'),
+(37, 'Murphy', 39, '2019-05-16', 'Macho', 0.95, 'CHIP037', NULL, '/fotos/murphy.jpg', 'Ninguna', 'Problemas de muda'),
+(38, 'Rosie', 40, '2020-08-22', 'Hembra', 2.10, 'CHIP038', 'TAT038', '/fotos/rosie.jpg', 'Polen', 'Artritis'),
+(39, 'Jax', 41, '2018-12-10', 'Macho', 1.80, 'CHIP039', 'TAT039', '/fotos/jax.jpg', 'Ninguna', 'Problemas digestivos'),
+(40, 'Abby', 42, '2021-05-14', 'Hembra', 0.65, 'CHIP040', NULL, '/fotos/abby.jpg', 'Alimentos con conservantes', 'Ninguna'),
+(41, 'Gus', 43, '2019-08-27', 'Macho', 0.48, 'CHIP041', NULL, '/fotos/gus.jpg', 'Ninguna', 'Problemas de plumas'),
+(42, 'Piper', 44, '2020-06-19', 'Hembra', 0.52, 'CHIP042', NULL, '/fotos/piper.jpg', 'Semillas de girasol', 'Ninguna'),
+(43, 'Henry', 45, '2018-04-13', 'Macho', 3.50, 'CHIP043', 'TAT043', '/fotos/henry.jpg', 'Ninguna', 'Problemas dentales'),
+(44, 'Gracie', 46, '2021-09-02', 'Hembra', 2.90, 'CHIP044', 'TAT044', '/fotos/gracie.jpg', 'Henos específicos', 'Sobrepeso'),
+(45, 'Leo', 47, '2019-02-28', 'Macho', 1.20, 'CHIP045', 'TAT045', '/fotos/leo.jpg', 'Ninguna', 'Problemas respiratorios'),
+(46, 'Maddie', 48, '2020-07-11', 'Hembra', 1.05, 'CHIP046', 'TAT046', '/fotos/maddie.jpg', 'Productos químicos', 'Ninguna'),
+(47, 'Ollie', 49, '2018-10-24', 'Macho', 0.08, 'CHIP047', NULL, '/fotos/ollie.jpg', 'Algas específicas', 'Problemas de escamas'),
+(48, 'Roxy', 50, '2021-11-15', 'Hembra', 0.06, 'CHIP048', NULL, '/fotos/roxy.jpg', 'Ninguna', 'Ninguna'),
+(49, 'Finn', 6, '2019-06-08', 'Macho', 2.10, 'CHIP049', 'TAT049', '/fotos/finn.jpg', 'Polvo', 'Problemas de piel'),
+(50, 'Sadie', 5, '2020-12-21', 'Hembra', 2.80, 'CHIP050', 'TAT050', '/fotos/sadie.jpg', 'Ninguna', 'Problemas cardíacos leves');
 
--- 4. Registros de jornada
-INSERT INTO registros_jornada (jornada_id, mascota_id, fecha_registro, vacuna_aplicada, lote_vacuna, observaciones) VALUES 
-(1, 1, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024A', 'Mascota en buen estado'),
-(1, 2, '2025-06-20', 'Vacuna Polivalente', 'LOT-POLI-2024B', 'Requiere control en 1 año'),
-(1, 3, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024A', 'Sin reacciones adversas'),
-(2, 4, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024B', 'Primera vacunación'),
-(2, 5, '2025-06-20', 'Vacuna Polivalente', 'LOT-POLI-2024C', 'Refuerzo anual'),
-(3, 5, '2025-05-15', 'Vacuna Antirrábica', 'LOT-RAB-2024C', 'Programada');
+INSERT INTO veterinarios (nombre_completo, documento_identidad, licencia_profesional, especialidad, telefono, email, fecha_contratacion) VALUES
+('Dra. Elena Morales Ríos', 'VET001', 'LIC001', 'Medicina General', '600100100', 'elena.morales@vetclinic.com', '2023-03-15'),
+('Dr. Carlos Mendoza López', 'VET002', 'LIC002', 'Cirugía', '600100101', 'carlos.mendoza@vetclinic.com', '2023-06-20'),
+('Dra. Ana Sánchez Torres', 'VET003', 'LIC003', 'Dermatología', '600100102', 'ana.sanchez@vetclinic.com', '2022-11-10'),
+('Dr. Javier Ruiz García', 'VET004', 'LIC004', 'Cardiología', '600100103', 'javier.ruiz@vetclinic.com', '2023-01-25'),
+('Dra. Laura Díaz Méndez', 'VET005', 'LIC005', 'Oftalmología', '600100104', 'laura.diaz@vetclinic.com', '2025-09-12'),
+('Dr. Miguel Ángel Castro', 'VET006', 'LIC006', 'Odontología', '600100105', 'miguel.castro@vetclinic.com', '2023-04-05'),
+('Dra. Sofía Herrera Jiménez', 'VET007', 'LIC007', 'Neurología', '600100106', 'sofia.herrera@vetclinic.com', '2023-02-18'),
+('Dr. David Ortega Silva', 'VET008', 'LIC008', 'Oncología', '600100107', 'david.ortega@vetclinic.com', '2023-07-30'),
+('Dra. Isabel Vargas Cruz', 'VET009', 'LIC009', 'Medicina Interna', '600100108', 'isabel.vargas@vetclinic.com', '2023-08-22'),
+('Dr. Ricardo Mendoza León', 'VET010', 'LIC010', 'Traumatología', '600100109', 'ricardo.mendoza@vetclinic.com', '2022-11-14'),
+('Dra. Carmen Ríos Vega', 'VET011', 'LIC011', 'Anestesiología', '600100110', 'carmen.rios@vetclinic.com', '2025-05-19'),
+('Dr. Alejandro Soto Marín', 'VET012', 'LIC012', 'Radiología', '600100111', 'alejandro.soto@vetclinic.com', '2025-03-27'),
+('Dra. Patricia Núñez Guerrero', 'VET013', 'LIC013', 'Endocrinología', '600100112', 'patricia.nunez@vetclinic.com', '2023-09-08'),
+('Dr. Roberto Delgado Flores', 'VET014', 'LIC014', 'Nefrología', '600100113', 'roberto.delgado@vetclinic.com', '2024-12-03'),
+('Dra. Mónica Paredes Rojas', 'VET015', 'LIC015', 'Hematología', '600100114', 'monica.paredes@vetclinic.com', '2020-06-11'),
+('Dr. Fernando Reyes Campos', 'VET016', 'LIC016', 'Urología', '600100115', 'fernando.reyes@vetclinic.com', '2024-10-29'),
+('Dra. Lucía Mora Fuentes', 'VET017', 'LIC017', 'Gastroenterología', '600100116', 'lucia.mora@vetclinic.com', '2023-01-07'),
+('Dr. Gabriel Peña Medina', 'VET018', 'LIC018', 'Neumología', '600100117', 'gabriel.pena@vetclinic.com', '2025-07-25'),
+('Dra. Raquel Sandoval Cortés', 'VET019', 'LIC019', 'Rehabilitación', '600100118', 'raquel.sandoval@vetclinic.com', '2025-04-16'),
+('Dr. Héctor Guzmán Pacheco', 'VET020', 'LIC020', 'Medicina de Emergencias', '600100119', 'hector.guzman@vetclinic.com', '2024-11-30');
 
--- 5. Sistema de puntos
-INSERT INTO puntos_club (club_id, factura_id, puntos_ganados, fecha_ganancia, fecha_vencimiento, estado) VALUES 
-(1, 201, 8, '2024-09-23', '2025-12-23', 'ACTIVO'),
-(2, 201, 15, '2024-09-20', '2026-03-20', 'ACTIVO'),
-(3, 202, 4, '2024-09-18', '2026-03-18', 'ACTIVO'),
-(4, 203, 22, '2024-09-15', '2026-03-15', 'ACTIVO'),
-(5, 204, 9, '2024-09-10', '2026-03-10', 'USADO'),
-(5, 202, 6, '2024-03-22', '2024-12-22', 'ACTIVO');
 
--- 6. Beneficios del club
-INSERT INTO beneficios_club (nivel, nombre_beneficio, descripcion, puntos_requeridos, descuento_porcentaje, servicio_gratuito, activo) VALUES 
-('BRONCE', 'Descuento Básico', '5% de descuento en consultas generales', 100, 5.00, NULL, TRUE),
-('BRONCE', 'Baño Gratis', 'Baño profesional gratuito cada 3 meses', 150, NULL, 'Baño Profesional', TRUE),
-('PLATA', 'Descuento Plata', '10% de descuento en todos los servicios', 300, 10.00, NULL, TRUE),
-('PLATA', 'Desparasitación Gratuita', 'Desparasitación interna y externa gratuita', 250, NULL, 'Desparasitación', TRUE),
-('ORO', 'Consulta Gratuita', 'Una consulta general gratuita cada 6 meses', 600, NULL, 'Consulta General', TRUE),
-('ORO', 'Descuento Oro', '15% de descuento en procedimientos', 500, 15.00, NULL, TRUE),
-('DIAMANTE', 'Vacuna Gratuita', 'Una vacuna gratuita al año', 1000, NULL, 'Vacunación', TRUE),
-('DIAMANTE', 'Descuento Diamante', '20% de descuento permanente', 800, 20.00, NULL, TRUE),
-('DIAMANTE', 'Chequeo Completo', 'Chequeo general anual gratuito', 1200, NULL, 'Chequeo Anual', TRUE);
+INSERT INTO citas (mascota_id, veterinario_id, fecha_hora, motivo, estado_id, observaciones) VALUES
+(1, 1, '2022-01-15 09:00:00', 'Vacunación anual', 1, 'Primera visita del año'),
+(2, 2, '2022-02-20 10:30:00', 'Control post-operatorio', 2, 'Recuperación de cirugía'),
+(3, 3, '2022-03-10 11:00:00', 'Problemas de piel', 1, 'Alergias estacionales'),
+(4, 4, '2022-04-05 14:15:00', 'Chequeo cardíaco', 3, 'Soplo cardíaco detectado'),
+(5, 5, '2022-05-12 16:00:00', 'Problemas oculares', 1, 'Lagrimeo excesivo'),
+(6, 6, '2022-06-08 08:45:00', 'Limpieza dental', 2, 'Sarro acumulado'),
+(7, 7, '2022-07-19 13:30:00', 'Convulsiones', 4, 'Episodio neurológico'),
+(8, 8, '2022-08-22 15:20:00', 'Control oncológico', 1, 'Seguimiento quimioterapia'),
+(9, 9, '2022-09-14 10:00:00', 'Vómitos recurrentes', 3, 'Problemas digestivos'),
+(10, 10, '2022-10-03 11:45:00', 'Fractura pata', 4, 'Accidente en casa'),
+(11, 11, '2022-11-17 09:30:00', 'Castración', 2, 'Cirugía programada'),
+(12, 12, '2022-12-05 14:00:00', 'Radiografía cadera', 1, 'Displasia sospechada'),
+(13, 13, '2023-01-20 08:15:00', 'Control diabetes', 3, 'Ajuste de insulina'),
+(14, 14, '2023-02-14 16:30:00', 'Problemas renales', 1, 'Análisis de orina'),
+(15, 15, '2023-03-08 10:45:00', 'Anemia', 4, 'Transfusión necesaria'),
+(16, 16, '2023-04-25 13:00:00', 'Infección urinaria', 2, 'Antibióticos necesarios'),
+(17, 17, '2023-05-30 15:15:00', 'Diarrea crónica', 1, 'Problemas gastrointestinales'),
+(18, 18, '2023-06-12 09:00:00', 'Problemas respiratorios', 3, 'Tos persistente'),
+(19, 19, '2023-07-07 11:30:00', 'Rehabilitación', 1, 'Terapia física'),
+(20, 20, '2023-08-18 14:45:00', 'Emergencia', 4, 'Accidente automovilístico'),
+(21, 1, '2023-09-22 08:30:00', 'Vacunación', 2, 'Refuerzo anual'),
+(22, 2, '2023-10-11 16:00:00', 'Cirugía menor', 1, 'Extracción de tumor'),
+(23, 3, '2023-11-29 10:15:00', 'Alergias', 3, 'Pruebas alérgicas'),
+(24, 4, '2023-12-15 13:45:00', 'Control cardíaco', 1, 'Ecocardiograma'),
+(25, 5, '2024-01-10 09:30:00', 'Cataratas', 2, 'Evaluación quirúrgica'),
+(26, 6, '2024-02-28 15:00:00', 'Extracción dental', 1, 'Diente fracturado'),
+(27, 7, '2024-03-19 11:00:00', 'Control neurológico', 3, 'Medicación ajustada'),
+(28, 8, '2024-04-05 14:20:00', 'Quimioterapia', 1, 'Sesión 3 de 6'),
+(29, 9, '2024-05-22 08:45:00', 'Vómitos', 2, 'Cambio de dieta'),
+(30, 10, '2024-06-14 16:30:00', 'Control fractura', 1, 'Retiro de yeso');
+
+
+INSERT INTO consultas_medicas (mascota_id, veterinario_id, cita_id, fecha_hora, motivo, sintomas, diagnostico, recomendaciones, peso_registrado, temperatura) VALUES
+(1, 1, 1, '2022-01-15 09:30:00', 'Vacunación anual', 'Ninguno', 'Saludable', 'Vacuna aplicada correctamente', 28.5, 38.2),
+(2, 2, 2, '2022-02-20 11:00:00', 'Control post-operatorio', 'Dolor leve', 'Recuperación normal', 'Continuar con analgésicos', 25.8, 38.5),
+(3, 3, 3, '2022-03-10 11:45:00', 'Problemas de piel', 'Picazón, enrojecimiento', 'Dermatitis alérgica', 'Antihistamínicos y shampoo especial', 32.1, 38.3),
+(4, 4, 4, '2022-04-05 15:00:00', 'Chequeo cardíaco', 'Tos ocasional', 'Soplo cardíaco grado II', 'Ecocardiograma mensual', 12.5, 38.6),
+(5, 5, 5, '2022-05-12 16:30:00', 'Problemas oculares', 'Lagrimeo, legañas', 'Conjuntivitis', 'Gotas antibióticas 3 veces al día', 5.2, 38.4),
+(6, 6, 6, '2022-06-08 09:30:00', 'Limpieza dental', 'Mal aliento', 'Gingivitis moderada', 'Limpieza profunda realizada', 3.8, 38.2),
+(7, 7, 7, '2022-07-19 14:15:00', 'Convulsiones', 'Temblores, desorientación', 'Epilepsia idiopática', 'Fenobarbital 2 veces al día', 24.3, 38.7),
+(8, 8, 8, '2022-08-22 16:00:00', 'Control oncológico', 'Pérdida de peso', 'Linfoma en remisión', 'Continuar quimioterapia', 7.5, 38.3),
+(9, 9, 9, '2022-09-14 10:45:00', 'Vómitos recurrentes', 'Vómitos, inapetencia', 'Gastritis crónica', 'Dieta blanda y protectores gástricos', 15.2, 38.5),
+(10, 10, 10, '2022-10-03 12:30:00', 'Fractura pata', 'Cojeera, dolor', 'Fractura radio distal', 'Yeso por 6 semanas', 4.1, 38.8),
+(11, 11, 11, '2022-11-17 10:15:00', 'Castración', 'Ninguno', 'Post-operatorio normal', 'Reposo por 10 días', 29.8, 38.2),
+(12, 12, 12, '2022-12-05 14:45:00', 'Radiografía cadera', 'Dificultad para levantarse', 'Displasia de cadera grado I', 'Suplementos articulares y ejercicio moderado', 26.5, 38.4),
+(13, 13, 13, '2023-01-20 09:00:00', 'Control diabetes', 'Sed excesiva', 'Diabetes controlada', 'Ajuste dosis insulina', 45.2, 38.3),
+(14, 14, 14, '2023-02-14 17:00:00', 'Problemas renales', 'Vómitos, deshidratación', 'Insuficiencia renal crónica', 'Dieta renal y fluidoterapia', 18.7, 38.9),
+(15, 15, 15, '2023-03-08 11:30:00', 'Anemia', 'Decaimiento, mucosas pálidas', 'Anemia regenerativa', 'Suplementos de hierro y vitamina B12', 6.8, 38.1),
+(16, 16, 16, '2023-04-25 13:45:00', 'Infección urinaria', 'Orina con sangre', 'Cistitis bacteriana', 'Antibióticos por 10 días', 4.5, 38.7),
+(17, 17, 17, '2023-05-30 16:00:00', 'Diarrea crónica', 'Diarrea, pérdida de peso', 'Colitis linfoplasmocítica', 'Dieta hipoalergénica y probióticos', 22.3, 38.4),
+(18, 18, 18, '2023-06-12 09:45:00', 'Problemas respiratorios', 'Tos, dificultad respiratoria', 'Bronquitis crónica', 'Broncodilatadores y antiinflamatorios', 5.1, 38.6),
+(19, 19, 19, '2023-07-07 12:15:00', 'Rehabilitación', 'Dificultad para caminar', 'Artrosis lumbar', 'Fisioterapia y acupuntura', 3.2, 38.3),
+(20, 20, 20, '2023-08-18 15:30:00', 'Emergencia', 'Traumatismo multiple', 'Fracturas múltiples, shock', 'Hospitalización y cirugía urgente', 6.5, 37.8),
+(21, 1, 21, '2023-09-22 09:15:00', 'Vacunación', 'Ninguno', 'Saludable', 'Vacunas al día', 8.2, 38.2),
+(22, 2, 22, '2023-10-11 16:45:00', 'Cirugía menor', 'Tumor cutáneo', 'Tumor benigno extirpado', 'Suturas por 14 días', 4.8, 38.4),
+(23, 3, 23, '2023-11-29 11:30:00', 'Alergias', 'Picazón estacional', 'Atopia', 'Inmunoterapia y antihistamínicos', 5.6, 38.3),
+(24, 4, 24, '2023-12-15 14:30:00', 'Control cardíaco', 'Intolerancia al ejercicio', 'Cardiomiopatía dilatada', 'Medicación cardíaca de por vida', 0.35, 38.5),
+(25, 5, 25, '2024-01-10 10:15:00', 'Cataratas', 'Visión disminuida', 'Cataratas seniles', 'Evaluación para cirugía', 0.45, 38.2),
+(26, 6, 26, '2024-02-28 15:45:00', 'Extracción dental', 'Dolor al masticar', 'Diente fracturado con pulpitis', 'Extracción realizada con éxito', 0.28, 38.6),
+(27, 7, 27, '2024-03-19 11:45:00', 'Control neurológico', 'Convulsiones controladas', 'Epilepsia estable', 'Mantener dosis actual', 0.15, 38.3),
+(28, 8, 28, '2024-04-05 15:00:00', 'Quimioterapia', 'Náuseas leves', 'Tolerancia adecuada al tratamiento', 'Antieméticos pre-quimioterapia', 0.32, 38.4),
+(29, 9, 29, '2024-05-22 09:30:00', 'Vómitos', 'Vómitos post-prandiales', 'Reflujo gastroesofágico', 'Alimentación fraccionada y antiácidos', 0.25, 38.5),
+(30, 10, 30, '2024-06-14 17:15:00', 'Control fractura', 'Movilidad mejorada', 'Fractura consolidada', 'Ejercicio progresivo', 0.18, 38.3);
+
+INSERT INTO procedimientos_especiales (mascota_id, veterinario_id, tipo_procedimiento, nombre_procedimiento, fecha_hora, duracion_estimada_minutos, detalle_procedimiento, estado, costo_procedimiento) VALUES
+(1, 2, 'Cirugía', 'Castración', '2022-02-10 09:00:00', 45, 'Orquiectomía rutinaria', 'Finalizado', 150.00),
+(2, 2, 'Cirugía', 'Luxación de cadera', '2022-03-05 10:30:00', 120, 'Reducción de luxación cadera derecha', 'Finalizado', 450.00),
+(3, 6, 'Odontología', 'Extracción múltiple', '2022-04-12 08:45:00', 90, 'Extracción de 3 piezas dentales', 'Finalizado', 280.00),
+(4, 4, 'Cardiología', 'Ecocardiograma', '2022-05-18 11:00:00', 60, 'Estudio ecocardiográfico completo', 'Finalizado', 180.00),
+(5, 5, 'Oftalmología', 'Cirugía de cataratas', '2022-06-22 13:15:00', 150, 'Facomulsificación bilateral', 'Finalizado', 1200.00),
+(6, 6, 'Odontología', 'Limpieza dental profunda', '2022-07-08 09:30:00', 75, 'Profilaxis y pulido dental', 'Finalizado', 120.00),
+(7, 7, 'Neurología', 'RMN cerebral', '2022-08-15 14:00:00', 90, 'Resonancia magnética nuclear', 'Finalizado', 650.00),
+(8, 8, 'Oncología', 'Quimioterapia', '2022-09-20 10:45:00', 180, 'Sesión de quimioterapia IV', 'Finalizado', 350.00),
+(9, 9, 'Medicina Interna', 'Endoscopia digestiva', '2022-10-25 11:30:00', 60, 'Endoscopia diagnóstica', 'Finalizado', 420.00),
+(10, 10, 'Traumatología', 'Osteosíntesis', '2022-11-30 08:00:00', 180, 'Fijación interna de fractura', 'Finalizado', 800.00),
+(11, 2, 'Cirugía', 'Esterilización', '2022-12-14 09:15:00', 60, 'Ovariohisterectomía rutinaria', 'Finalizado', 200.00),
+(12, 12, 'Radiología', 'Artrocentesis', '2023-01-25 13:45:00', 30, 'Análisis de líquido sinovial', 'Finalizado', 150.00),
+(13, 13, 'Endocrinología', 'Monitorización glucosa', '2023-02-28 10:00:00', 240, 'Curva de glucosa seriada', 'Finalizado', 95.00),
+(14, 14, 'Nefrología', 'Biopsia renal', '2023-03-15 11:15:00', 90, 'Biopsia renal ecoguiada', 'Finalizado', 580.00),
+(15, 15, 'Hematología', 'Transfusión sanguínea', '2023-04-20 14:30:00', 120, 'Transfusión de concentrado eritrocitario', 'Finalizado', 320.00),
+(16, 16, 'Urología', 'Cistoscopia', '2023-05-10 09:45:00', 45, 'Endoscopia urinaria diagnóstica', 'Finalizado', 380.00),
+(17, 17, 'Gastroenterología', 'Biopsia intestinal', '2023-06-05 12:00:00', 75, 'Biopsia endoscópica duodenal', 'Finalizado', 520.00),
+(18, 18, 'Neumología', 'Broncoscopia', '2023-07-18 10:30:00', 60, 'Endoscopia respiratoria', 'Finalizado', 450.00),
+(19, 19, 'Rehabilitación', 'Hidroterapia', '2023-08-22 15:00:00', 45, 'Sesión de terapia acuática', 'Finalizado', 65.00),
+(20, 20, 'Emergencias', 'Reanimación', '2023-09-12 16:45:00', 180, 'Reanimación cardiopulmonar', 'Finalizado', 280.00),
+(21, 2, 'Cirugía', 'Extirpación tumor', '2023-10-30 08:30:00', 90, 'Extirpación de tumor cutáneo', 'Finalizado', 320.00),
+(22, 6, 'Odontología', 'Corona dental', '2023-11-14 11:00:00', 120, 'Colocación de corona metálica', 'Finalizado', 420.00),
+(23, 3, 'Dermatología', 'Pruebas alérgicas', '2023-12-08 13:15:00', 90, 'Prueba intradérmica de alergias', 'Finalizado', 190.00),
+(24, 4, 'Cardiología', 'Holter', '2024-01-17 09:00:00', 1440, 'Monitorización cardíaca 24h', 'Finalizado', 220.00),
+(25, 5, 'Oftalmología', 'Test Schirmer', '2024-02-21 10:45:00', 15, 'Medición de producción lagrimal', 'Finalizado', 45.00),
+(26, 7, 'Neurología', 'Electromiografía', '2024-03-26 14:00:00', 60, 'Estudio de conducción nerviosa', 'Finalizado', 310.00),
+(27, 8, 'Oncología', 'Radioterapia', '2024-04-10 11:30:00', 45, 'Sesión de radioterapia local', 'Finalizado', 480.00),
+(28, 9, 'Medicina Interna', 'Paracentesis', '2024-05-15 15:15:00', 30, 'Extracción de líquido abdominal', 'Finalizado', 120.00),
+(29, 10, 'Traumatología', 'Artroscopia', '2024-06-20 08:45:00', 90, 'Exploración articular artroscópica', 'Finalizado', 680.00),
+(30, 11, 'Anestesiología', 'Bloqueo nervioso', '2024-07-05 12:30:00', 30, 'Bloqueo analgésico regional', 'Finalizado', 95.00);
+
+
+INSERT INTO historial_medico (mascota_id, fecha_evento, evento_tipo_id, descripcion, diagnostico, tratamiento_recomendado, veterinario_id, consulta_id, procedimiento_id) VALUES
+(1, '2022-01-15', 1, 'Vacunación anual contra rabia y moquillo', 'Saludable', 'Revacunación en 1 año', 1, 61, 1),
+(2, '2022-02-20', 3, 'Cirugía de cadera por luxación', 'Luxación cadera derecha', 'Reposo por 8 semanas, control radiográfico', 2, 62, 2),
+(3, '2022-03-10', 6, 'Desparasitación interna y externa', 'Parásitos gastrointestinales', 'Desparasitante cada 3 meses', 3, 63, 3),
+(4, '2022-04-05', 2, 'Consulta por soplo cardíaco', 'Soplo cardíaco grado II', 'Ecocardiograma cada 6 meses', 4, 64, 4),
+(5, '2022-05-12', 9, 'Diagnóstico de conjuntivitis', 'Conjuntivitis bacteriana', 'Gotas oftálmicas 3 veces al día por 7 días', 5, 65, 5),
+(6, '2022-06-08', 9, 'Limpieza dental profunda', 'Gingivitis moderada', 'Cepillado dental diario', 6, 66, 6),
+(7, '2022-07-19', 8, 'Emergencia por convulsiones', 'Epilepsia idiopática', 'Fenobarbital 2 veces al día', 7, 67, 7),
+(8, '2022-08-22', 2, 'Control oncológico post-quimioterapia', 'Linfoma en remisión', 'Continuar protocolo quimioterapéutico', 8, 68, 8),
+(9, '2022-09-14', 2, 'Consulta por vómitos recurrentes', 'Gastritis crónica', 'Dieta gastrointestinal y protectores gástricos', 9, 69, 9),
+(10, '2022-10-03', 3, 'Cirugía por fractura de radio', 'Fractura radio distal', 'Yeso por 6 semanas, control radiográfico', 10, 70, 10);
