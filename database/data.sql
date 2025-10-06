@@ -337,3 +337,68 @@ INSERT INTO historial_medico (mascota_id, fecha_evento, evento_tipo_id, descripc
 (8, '2022-08-22', 2, 'Control oncológico post-quimioterapia', 'Linfoma en remisión', 'Continuar protocolo quimioterapéutico', 8, 68, 8),
 (9, '2022-09-14', 2, 'Consulta por vómitos recurrentes', 'Gastritis crónica', 'Dieta gastrointestinal y protectores gástricos', 9, 69, 9),
 (10, '2022-10-03', 3, 'Cirugía por fractura de radio', 'Fractura radio distal', 'Yeso por 6 semanas, control radiográfico', 10, 70, 10);
+
+INSERT INTO proveedores (nombre_empresa, contacto, telefono, email, direccion, sitio_web, activo) VALUES
+('FarmaVet Global', 'Andrés Cárdenas', '809-123-4567', 'andres@farmavet.com', 'Calle 50 # 12-34, Bogotá', 'www.farmavet.com', TRUE),
+('Suministros Quirúrgicos S.A.', 'Elena Gómez', '310-987-6543', 'elena@sumiquirurgicos.co', 'Av. Las Américas 100, Medellín', 'www.sumiquirurgicos.co', TRUE),
+('Nutrición Animal Premium', 'Ricardo Silva', '601-234-5678', 'ricardo@nutrianimal.net', 'Zona Franca, Cartagena', 'www.nutrianimal.net', TRUE),
+('Biomedicinas Veterinaria', 'Luisa Fernanda Díaz', '300-543-2109', 'luisa@biomedvet.com', 'Carrera 4 # 8-15, Cali', 'www.biomedvet.com', FALSE),
+('Equipo Clínico MX', 'José Martinez', '55-11-22-33', 'jose@equipoclinico.mx', 'Insurgentes Sur 15, México D.F.', 'www.equipoclinico.mx', TRUE),
+('Materiales de Curación Ltda.', 'Claudia Ramos', '800-333-5555', 'claudia@curacionltda.com', 'Ronda del Mar 2, Barranquilla', 'www.curacionltda.com', TRUE),
+('Productos Biológicos Andinos', 'Mauricio Toro', '604-789-0123', 'mauricio@pba.co', 'Parque Industrial, Manizales', 'www.pba.co', TRUE),
+('Alimentos Concentrados S.A.', 'Daniela Restrepo', '320-876-5432', 'daniela@alimentoscon.com', 'Vía al Puerto Km 5, Buenaventura', 'www.alimentoscon.com', TRUE),
+('Distribuidora Veterinaria Sur', 'Pedro Castro', '4-444-1111', 'pedro@vetsur.com', 'Ruta 5 Sur, Santiago de Chile', 'www.vetsur.com', FALSE),
+('Proveeduría General', 'Mónica Rivas', '7-654-3210', 'monica@progen.com', 'Calle Mayor 1, Lima, Perú', 'www.progen.com', TRUE);
+
+INSERT INTO inventario (nombre_producto, producto_tipo_id, descripcion, fabricante, proveedor_id, lote, cantidad_stock, stock_minimo, unidad_medida, fecha_vencimiento, precio_compra, precio_venta, requiere_receta, activo) VALUES
+('Meloxicam 1.5mg/ml', 1, 'Antiinflamatorio no esteroideo para dolor crónico.', 'PharmaVet', 1, 'Melo2025B', 200, 30, 'ml', '2025-09-01', 12.00, 25.00, TRUE, TRUE),
+('Sutura Catgut Crómico 2-0', 3, 'Sutura absorbible para tejidos blandos.', 'Suministros Quirúrgicos S.A.', 2, 'CGC20X', 80, 15, 'unidad', NULL, 8.50, 18.00, FALSE, TRUE),
+('Alimento Cachorros High Energy', 4, 'Dieta de alta energía para crecimiento rápido.', 'Nutrición Animal Premium', 3, 'HENA0424', 50, 10, 'kg', '2026-06-01', 35.00, 60.00, FALSE, TRUE),
+('Vacuna Parvovirus/Moquillo', 2, 'Vacuna polivalente para cachorros.', 'Productos Biológicos Andinos', 7, 'VPM24A', 120, 25, 'dosis', '2026-12-31', 20.00, 40.00, TRUE, TRUE),
+('Guantes Quirúrgicos Estériles', 3, 'Talla 7.5, caja de 50 pares.', 'Equipo Clínico MX', 5, 'GQE7524', 90, 20, 'caja', NULL, 15.00, 30.00, FALSE, TRUE),
+('Doxiciclina 100mg', 1, 'Antibiótico usado para Ehrlichia y otras infecciones.', 'FarmaVet Global', 1, 'DoxiC100', 180, 40, 'tableta', '2025-05-20', 1.20, 3.50, TRUE, TRUE),
+('Bolsa de Suero Ringer Lactato', 3, 'Solución intravenosa para rehidratación.', 'Materiales de Curación Ltda.', 6, 'RingerL25', 300, 50, 'bolsa', '2025-10-15', 3.00, 8.00, FALSE, TRUE),
+('Pipeta Antiparasitaria (Grande)', 1, 'Tratamiento tópico contra pulgas y garrapatas.', 'Biomedicinas Veterinaria', 4, 'PAG0624', 110, 30, 'unidad', '2027-01-01', 18.00, 35.00, FALSE, TRUE),
+('Cinta Adhesiva Quirúrgica', 3, 'Cinta hipoalergénica de 5cm x 10m.', 'Suministros Quirúrgicos S.A.', 2, 'CAQ5CM', 150, 20, 'rollo', NULL, 4.50, 9.00, FALSE, TRUE),
+('Alimento Post-operatorio (Latas)', 4, 'Dieta blanda de recuperación.', 'Nutrición Animal Premium', 3, 'POSTOPL24', 70, 15, 'lata', '2025-11-01', 2.50, 5.50, FALSE, TRUE);
+
+INSERT INTO prescripciones (consulta_id, procedimiento_id, producto_id, cantidad, dosis, frecuencia, duracion_dias, instrucciones) VALUES
+(61, 1, 1, 1, '0.2ml/kg', 'Cada 24h', 5, 'Inyección SC en consulta. 4 días orales de seguimiento.'),
+(62, 2, 6, 4, '100mg', 'Cada 12h', 7, 'Para tratamiento de sospecha de Ehrlichia.'),
+(63, 3, 8, 1, 'Dosis única', 'Hoy', 30, 'Aplicación en la nuca. Evitar baño por 48h.'),
+(64, 4, 1, 5, '0.2ml/kg', 'Cada 24h', 5, 'Seguimiento por artritis. Dar con comida.'),
+(65, 5, 6, 1, '100mg', 'Cada 24h', 10, 'Tratamiento para infección respiratoria.'),
+(66, 6, 1, 5, '0.2ml/kg', 'Cada 24h', 5, 'Manejo del dolor post-quirúrgico.'),
+(67, 2, 8, 1, 'Dosis única', 'Hoy', 30, 'Antiparasitario de rutina post-limpieza dental.'),
+(68, 7, 6, 4, '100mg', 'Cada 12h', 7, 'Profilaxis antibiótica post-cirugía menor.'),
+(69, 8, 8, 1, 'Dosis única', 'Hoy', 30, 'Prevención parasitaria.'),
+(70, 8, 1, 1, '0.2ml/kg', 'Cada 24h', 10, 'Tratamiento prolongado por inflamación.');
+
+INSERT INTO insumos_procedimientos (procedimiento_id, producto_id, cantidad_usada, observaciones) VALUES
+(1, 3, 3, 'Uso de tres suturas 2-0 en cierre abdominal y subcutáneo.'),
+(2, 5, 2, 'Dos pares de guantes usados (cirujano y asistente).'),
+(1, 7, 2, '2 bolsas de Ringer Lactato utilizadas durante la cirugía.'),
+(2, 9, 1, 'Cinta usada para fijar el tubo endotraqueal.'),
+(3, 3, 1, 'Una sutura Catgut 2-0 en reparación de herida.'),
+(4, 7, 1, 'Una bolsa de Suero en procedimiento de fluidoterapia.'),
+(5, 5, 1, 'Un par de guantes en la toma de muestras.'),
+(2, 5, 1, 'Guantes usados para la limpieza dental.'),
+(4, 9, 1, 'Cinta para vendaje después de una inyección.'),
+(3, 7, 1, 'Una bolsa de Suero para hidratación post-trauma.');
+
+INSERT INTO movimientos_inventario (producto_id, tipo_movimiento, cantidad, stock_anterior, stock_nuevo, motivo, referencia_consulta_id, referencia_procedimiento_id, usuario) VALUES
+-- Entradas (Reposición de Stock)
+(4, 'Entrada', 100, 50, 150, 'Llegada de pedido 10123', 61, 1, 'Farmacia_MGR'),
+(2, 'Entrada', 50, 120, 170, 'Nuevo lote de vacunas', 62, 2, 'Farmacia_MGR'),
+-- Salidas por Venta/Prescripción (Consulta 101 usa producto 1, cantidad 10)
+(1, 'Salida', 10, 200, 190, 'Venta en consulta 101 (Meloxicam)', 63, 4, 'Vet_001'),
+(6, 'Salida', 14, 180, 166, 'Prescripción en consulta 102 (Doxiciclina)', 65, 8, 'Vet_002'),
+-- Salidas por Uso en Procedimiento (Procedimiento 201 usa producto 3, cantidad 3)
+(3, 'Salida', 3, 80, 77, 'Uso en procedimiento 201 (Sutura)', 64, 6, 'Vet_003'),
+(7, 'Salida', 2, 300, 298, 'Uso en procedimiento 201 (Suero)', 65, 7, 'Vet_003'),
+-- Ajustes (Pérdida/Vencimiento/Ganancia)
+(9, 'Ajuste', 5, 150, 145, 'Pérdida por daño de humedad', 66, 8, 'Farmacia_MGR'),
+(8, 'Vencimiento', 2, 110, 108, 'Baja por fecha de caducidad', 67, 9, 'Farmacia_MGR'),
+-- Más Salidas
+(10, 'Salida', 5, 70, 65, 'Venta dieta blanda post-operatoria', 68, 7, 'Vet_001'),
+(5, 'Salida', 1, 90, 89, 'Uso en toma de biopsia', 69, 1, 'Vet_004');
