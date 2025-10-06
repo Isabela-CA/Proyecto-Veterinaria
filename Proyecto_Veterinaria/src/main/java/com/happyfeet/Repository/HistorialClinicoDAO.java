@@ -13,7 +13,7 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
     @Override
     public List<HistorialClinico> listarHistorialClinico() {
         List<HistorialClinico> historiales = new ArrayList<>();
-        String sql = "SELECT * FROM historial_medico ORDER BY fecha_evento DESC, id DESC";
+        String sql = "SELECT * FROM historial_medico ORDER BY fecha_evento ASC";
 
         try (Connection con = DatabaseConfig.getConexion();
              PreparedStatement ps = con.prepareStatement(sql);
@@ -51,32 +51,24 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
 
     @Override
     public boolean agregarHistorialClinico(HistorialClinico historialClinico) {
-        String sql = "INSERT INTO historial_medico(mascota_id, veterinario_id, fecha_evento, evento_tipo_id, " +
-                "descripcion, diagnostico, tratamiento_recomendado, producto_id, cantidad_utilizada) " +
+        String sql = "INSERT INTO historial_medico(mascota_id, fecha_evento, evento_tipo_id,descripcion, " +
+                "diagnostico, tratamiento_recomendado, veterinario_id, consulta_id, procedimiento_id) " +
                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection con = DatabaseConfig.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, historialClinico.getMascota_id());
-            ps.setInt(2, historialClinico.getVeterinario_id());
-            ps.setDate(3, Date.valueOf(historialClinico.getFecha_evento()));
-            ps.setInt(4, historialClinico.getEvento_tipo_id());
-            ps.setString(5, historialClinico.getDescripcion());
-            ps.setString(6, historialClinico.getDiagnostico());
-            ps.setString(7, historialClinico.getTratamiento_recomendado());
+            ps.setDate(2, Date.valueOf(historialClinico.getFecha_evento()));
+            ps.setInt(3, historialClinico.getEvento_tipo_id());
+            ps.setString(4, historialClinico.getDescripcion());
+            ps.setString(5, historialClinico.getDiagnostico());
+            ps.setString(6, historialClinico.getTratamiento_recomendado());
+            ps.setInt(7, historialClinico.getVeterinario_id());
+            ps.setInt(8, historialClinico.getConsulta_id());
+            ps.setInt(9, historialClinico.getProcedimiento_id());
 
-            if (historialClinico.getProducto_id() != null) {
-                ps.setInt(8, historialClinico.getProducto_id());
-            } else {
-                ps.setNull(8, Types.INTEGER);
-            }
-
-            ps.setInt(9, historialClinico.getCantidad_utilizada());
-
-            int filasAfectadas = ps.executeUpdate();
-            return filasAfectadas > 0;
-
+        return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error al agregar el historial clínico: " + e.getMessage());
             e.printStackTrace();
@@ -86,33 +78,24 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
 
     @Override
     public boolean modificarHistorialClinico(HistorialClinico historialClinico) {
-        String sql = "UPDATE historial_medico SET mascota_id = ?, veterinario_id = ?, fecha_evento = ?, " +
-                "evento_tipo_id = ?, descripcion = ?, diagnostico = ?, tratamiento_recomendado = ?, " +
-                "producto_id = ?, cantidad_utilizada = ? WHERE id = ?";
+        String sql = "UPDATE historial_medico SET mascota_id =?, fecha_evento=?, evento_tipo_id=?,descripcion=?" +
+                "diagnostico=?, tratamiento_recomendado=?, veterinario_id=?, consulta_id=?, procedimiento_id=? " +
+                "WHERE id = ?";
 
         try (Connection con = DatabaseConfig.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setInt(1, historialClinico.getMascota_id());
-            ps.setInt(2, historialClinico.getVeterinario_id());
-            ps.setDate(3, Date.valueOf(historialClinico.getFecha_evento()));
-            ps.setInt(4, historialClinico.getEvento_tipo_id());
-            ps.setString(5, historialClinico.getDescripcion());
-            ps.setString(6, historialClinico.getDiagnostico());
-            ps.setString(7, historialClinico.getTratamiento_recomendado());
+            ps.setDate(2, Date.valueOf(historialClinico.getFecha_evento()));
+            ps.setInt(3, historialClinico.getEvento_tipo_id());
+            ps.setString(4, historialClinico.getDescripcion());
+            ps.setString(5, historialClinico.getDiagnostico());
+            ps.setString(6, historialClinico.getTratamiento_recomendado());
+            ps.setInt(7, historialClinico.getVeterinario_id());
+            ps.setInt(8, historialClinico.getConsulta_id());
+            ps.setInt(9, historialClinico.getProcedimiento_id());
 
-            if (historialClinico.getProducto_id() != null) {
-                ps.setInt(8, historialClinico.getProducto_id());
-            } else {
-                ps.setNull(8, Types.INTEGER);
-            }
-
-            ps.setInt(9, historialClinico.getCantidad_utilizada());
-            ps.setInt(10, historialClinico.getId());
-
-            int filasAfectadas = ps.executeUpdate();
-            return filasAfectadas > 0;
-
+            return ps.executeUpdate() > 0;
         } catch (SQLException e) {
             System.out.println("Error al modificar el historial clínico: " + e.getMessage());
             e.printStackTrace();
@@ -144,21 +127,18 @@ public class HistorialClinicoDAO implements IHistorialClinicoDAO {
     // Método para mapear ResultSet a HistorialClinico
     private HistorialClinico mapearHistorial(ResultSet rs) throws SQLException {
         var historial = new HistorialClinico();
+
         historial.setId(rs.getInt("id"));
         historial.setMascota_id(rs.getInt("mascota_id"));
-        historial.setVeterinario_id(rs.getInt("veterinario_id"));
         historial.setFecha_evento(rs.getDate("fecha_evento").toLocalDate());
         historial.setEvento_tipo_id(rs.getInt("evento_tipo_id"));
         historial.setDescripcion(rs.getString("descripcion"));
         historial.setDiagnostico(rs.getString("diagnostico"));
         historial.setTratamiento_recomendado(rs.getString("tratamiento_recomendado"));
+        historial.setVeterinario_id(rs.getInt("veterinario_id"));
+        historial.setConsulta_id(rs.getInt("Consulta_id"));
+        historial.setProcedimiento_id(rs.getInt("Procedimiento_id"));
 
-        int productoId = rs.getInt("producto_id");
-        if (!rs.wasNull()) {
-            historial.setProducto_id(productoId);
-        }
-
-        historial.setCantidad_utilizada(rs.getInt("cantidad_utilizada"));
         return historial;
     }
 }

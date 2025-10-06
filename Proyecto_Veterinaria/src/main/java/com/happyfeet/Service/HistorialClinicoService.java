@@ -8,21 +8,13 @@ import com.happyfeet.model.entities.HistorialClinico;
 import java.time.LocalDate;
 import java.util.List;
 
-
 public class HistorialClinicoService {
 
     private final IHistorialClinicoDAO historialDAO;
     private final IMascotaDAO mascotaDAO;
     private final IVeterinarioDAO veterinarioDAO;
 
-    // Tipos de eventos médicos como constantes
-    public static final int TIPO_VACUNACION = 1;
-    public static final int TIPO_CONSULTA_GENERAL = 2;
-    public static final int TIPO_CIRUGIA = 3;
-    public static final int TIPO_CONTROL_RUTINA = 4;
-    public static final int TIPO_EMERGENCIA = 5;
-    public static final int TIPO_OTRO = 6;
-
+    // Constructor con inyección de dependencias
     public HistorialClinicoService(IHistorialClinicoDAO historialDAO,
                                    IMascotaDAO mascotaDAO,
                                    IVeterinarioDAO veterinarioDAO) {
@@ -32,15 +24,25 @@ public class HistorialClinicoService {
     }
 
     /**
-     * Agrega un nuevo evento médico al historial
+     * Registra un nuevo historial clínico completo
+     * Este es el método principal para crear registros de historial
      */
-    public boolean agregarEventoMedico(HistorialClinico historial) {
+    public boolean agregarHistorialClinico(HistorialClinico historial) {
+        // Validaciones
         validarRelaciones(historial);
         validarDatosHistorial(historial);
 
-        // Establecer fecha actual si no se especifica
+        // Si no tiene fecha, usar fecha actual
         if (historial.getFecha_evento() == null) {
             historial.setFecha_evento(LocalDate.now());
+        }
+
+        // Normalizar campos de texto vacíos a NULL
+        if (historial.getDiagnostico() != null && historial.getDiagnostico().isBlank()) {
+            historial.setDiagnostico(null);
+        }
+        if (historial.getTratamiento_recomendado() != null && historial.getTratamiento_recomendado().isBlank()) {
+            historial.setTratamiento_recomendado(null);
         }
 
         return historialDAO.agregarHistorialClinico(historial);
@@ -61,14 +63,14 @@ public class HistorialClinicoService {
     }
 
     /**
-     * Obtiene un registro específico del historial
+     * Obtiene un historial específico por ID
      */
-    public HistorialClinico obtenerHistorial(int id) {
+    public HistorialClinico buscarHistorialClinicoPorId(int id) {
         return historialDAO.buscarHistorialClinicoPorId(id);
     }
 
     /**
-     * Lista todos los historiales clínicos
+     * Lista todos los historiales
      */
     public List<HistorialClinico> listarTodosLosHistoriales() {
         return historialDAO.listarHistorialClinico();
@@ -88,63 +90,6 @@ public class HistorialClinicoService {
         return historialDAO.modificarHistorialClinico(historial);
     }
 
-    /**
-     * Registra una vacunación (método especializado)
-     */
-    public boolean registrarVacunacion(int mascotaId, int veterinarioId,
-                                       String vacuna, String lote) {
-        var historial = new HistorialClinico();
-        historial.setMascota_id(mascotaId);
-        historial.setVeterinario_id(veterinarioId);
-        historial.setFecha_evento(LocalDate.now());
-        historial.setEvento_tipo_id(TIPO_VACUNACION);
-        historial.setDescripcion("Vacunación: " + vacuna);
-        historial.setDiagnostico("Prevención");
-        historial.setTratamiento_recomendado(
-                "Lote: %s. Próxima dosis según calendario.".formatted(lote)
-        );
-
-        return agregarEventoMedico(historial);
-    }
-
-    /**
-     * Registra una consulta general (método especializado)
-     */
-    public boolean registrarConsultaGeneral(int mascotaId, int veterinarioId,
-                                            String motivo, String diagnostico,
-                                            String tratamiento) {
-        var historial = new HistorialClinico();
-        historial.setMascota_id(mascotaId);
-        historial.setVeterinario_id(veterinarioId);
-        historial.setFecha_evento(LocalDate.now());
-        historial.setEvento_tipo_id(TIPO_CONSULTA_GENERAL);
-        historial.setDescripcion(motivo);
-        historial.setDiagnostico(diagnostico);
-        historial.setTratamiento_recomendado(tratamiento);
-
-        return agregarEventoMedico(historial);
-    }
-
-    /**
-     * Obtiene el historial filtrado por tipo de evento
-     */
-    public List<HistorialClinico> consultarPorTipoEvento(int mascotaId, int tipoEvento) {
-        return consultarHistorialPorMascota(mascotaId).stream()
-                .filter(h -> h.getEvento_tipo_id() == tipoEvento)
-                .toList();
-    }
-
-    /**
-     * Obtiene el historial en un rango de fechas
-     */
-    public List<HistorialClinico> consultarPorRangoFechas(int mascotaId,
-                                                          LocalDate fechaInicio,
-                                                          LocalDate fechaFin) {
-        return consultarHistorialPorMascota(mascotaId).stream()
-                .filter(h -> !h.getFecha_evento().isBefore(fechaInicio) &&
-                        !h.getFecha_evento().isAfter(fechaFin))
-                .toList();
-    }
 
     // Métodos de validación privados
 
@@ -158,7 +103,7 @@ public class HistorialClinicoService {
         }
 
         // Validación de veterinario si es necesario
-        if (veterinarioDAO != null) {
+        if (historial.getVeterinario_id() > 0 && veterinarioDAO != null) {
             var veterinario = veterinarioDAO.buscarVeterinarioPorId(
                     historial.getVeterinario_id()
             );
@@ -202,20 +147,5 @@ public class HistorialClinicoService {
                     "El ID de veterinario debe ser válido"
             );
         }
-    }
-
-    /**
-     * Obtiene el nombre del tipo de evento
-     */
-    public static String obtenerNombreTipoEvento(int tipoId) {
-        return switch (tipoId) {
-            case TIPO_VACUNACION -> "Vacunación";
-            case TIPO_CONSULTA_GENERAL -> "Consulta General";
-            case TIPO_CIRUGIA -> "Cirugía";
-            case TIPO_CONTROL_RUTINA -> "Control de Rutina";
-            case TIPO_EMERGENCIA -> "Emergencia";
-            case TIPO_OTRO -> "Otro";
-            default -> "Tipo Desconocido";
-        };
     }
 }

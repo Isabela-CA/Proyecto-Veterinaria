@@ -8,80 +8,102 @@ import com.happyfeet.model.entities.HistorialClinico;
 
 import java.util.List;
 
+/**
+ * Controlador para gestionar las operaciones del historial clínico
+ * Actúa como intermediario entre la vista y el servicio
+ */
 public class HistorialClinicoController {
 
-        private final HistorialClinicoService historialService;
+    private final HistorialClinicoService historialService;
 
-        // Constructor con dependencias inyectadas
-        public HistorialClinicoController(HistorialClinicoService historialService) {
-            this.historialService = historialService;
-        }
 
-        // Constructor sin parámetros que inicializa las dependencias
-        public HistorialClinicoController() {
-            HistorialClinicoDAO historialDAO = new HistorialClinicoDAO();
-            MascotaDAO mascotaDAO = new MascotaDAO();
-            VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
+    public HistorialClinicoController(HistorialClinicoService historialService) {
+        this.historialService = historialService;
+    }
 
-            this.historialService = new HistorialClinicoService(
-                    historialDAO,
-                    mascotaDAO,
-                    veterinarioDAO
-            );
-        }
 
-        public boolean agregarEventoMedico(HistorialClinico historial) {
-            try {
-                return historialService.agregarEventoMedico(historial);
-            } catch (Exception e) {
-                System.err.println("Error en controller al agregar evento médico: " + e.getMessage());
-                return false;
-            }
-        }
+    public HistorialClinicoController() {
+        HistorialClinicoDAO historialDAO = new HistorialClinicoDAO();
+        MascotaDAO mascotaDAO = new MascotaDAO();
+        VeterinarioDAO veterinarioDAO = new VeterinarioDAO();
 
-        public List<HistorialClinico> consultarHistorialPorMascota(int mascotaId) {
-            try {
-                return historialService.consultarHistorialPorMascota(mascotaId);
-            } catch (Exception e) {
-                System.err.println("Error en controller al consultar historial: " + e.getMessage());
-                return List.of();
-            }
-        }
+        this.historialService = new HistorialClinicoService(
+                historialDAO,
+                mascotaDAO,
+                veterinarioDAO
+        );
+    }
 
-        public HistorialClinico obtenerHistorial(int id) {
-            return historialService.obtenerHistorial(id);
-        }
 
-        public List<HistorialClinico> listarTodosLosHistoriales() {
-            return historialService.listarTodosLosHistoriales();
-        }
-
-        public boolean actualizarHistorial(HistorialClinico historial) {
-            try {
-                return historialService.actualizarHistorial(historial);
-            } catch (Exception e) {
-                System.err.println("Error en controller al actualizar historial: " + e.getMessage());
-                return false;
-            }
-        }
-
-        public boolean registrarVacunacion(int mascotaId, int veterinarioId, String vacuna, String lote) {
-            try {
-                return historialService.registrarVacunacion(mascotaId, veterinarioId, vacuna, lote);
-            } catch (Exception e) {
-                System.err.println("Error al registrar vacunación: " + e.getMessage());
-                return false;
-            }
-        }
-
-        public boolean registrarConsultaGeneral(int mascotaId, int veterinarioId, String motivo,
-                                                String diagnostico, String tratamiento) {
-            try {
-                return historialService.registrarConsultaGeneral(mascotaId, veterinarioId, motivo, diagnostico, tratamiento);
-            } catch (Exception e) {
-                System.err.println("Error al registrar consulta: " + e.getMessage());
-                return false;
-            }
+    public boolean agregarHistorialClinico(HistorialClinico historial) {
+        try {
+            return historialService.agregarHistorialClinico(historial);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error de validación: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error en controller al registrar historial: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 
+
+
+
+    public List<HistorialClinico> consultarHistorialPorMascota(int mascotaId) {
+        try {
+            return historialService.consultarHistorialPorMascota(mascotaId);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error de validación: " + e.getMessage());
+            return List.of();
+        } catch (Exception e) {
+            System.err.println("Error en controller al consultar historial: " + e.getMessage());
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+
+    public HistorialClinico buscarHistorialClinicoPorId(int id) {
+        try {
+            return historialService.buscarHistorialClinicoPorId(id);
+        } catch (Exception e) {
+            System.err.println("Error en controller al obtener historial: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Lista todos los historiales médicos registrados en el sistema
+     * @return Lista de todos los historiales
+     */
+    public List<HistorialClinico> listarTodosLosHistoriales() {
+        try {
+            return historialService.listarTodosLosHistoriales();
+        } catch (Exception e) {
+            System.err.println("Error en controller al listar historiales: " + e.getMessage());
+            e.printStackTrace();
+            return List.of();
+        }
+    }
+
+    /**
+     * Actualiza un registro de historial existente
+     * @param historial Objeto HistorialClinico con datos actualizados (debe tener ID válido)
+     * @return true si se actualizó correctamente, false en caso contrario
+     */
+    public boolean actualizarHistorial(HistorialClinico historial) {
+        try {
+            return historialService.actualizarHistorial(historial);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error de validación: " + e.getMessage());
+            return false;
+        } catch (Exception e) {
+            System.err.println("Error en controller al actualizar historial: " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+}

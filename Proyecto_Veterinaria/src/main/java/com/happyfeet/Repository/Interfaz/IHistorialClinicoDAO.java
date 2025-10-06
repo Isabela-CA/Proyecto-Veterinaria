@@ -10,5 +10,4 @@ public interface IHistorialClinicoDAO {
     boolean agregarHistorialClinico(HistorialClinico historialClinico);
     boolean modificarHistorialClinico(HistorialClinico historialClinico);
     List<HistorialClinico> listarHistorialPorMascota(int mascotaId);  // Agregar
-
 }
