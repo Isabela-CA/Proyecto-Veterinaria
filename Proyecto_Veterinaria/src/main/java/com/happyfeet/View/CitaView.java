@@ -32,7 +32,7 @@ public class CitaView {
             5. Consultar por Mascota
             6. Consultar por Veterinario
             0. Salir
-            """);
+            ==========================""");
 
         try {
             int opcion = scanner.nextInt();
@@ -64,7 +64,7 @@ public class CitaView {
             int veterinarioId = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Ingrese fecha y hora (dd/MM/yyyy HH:mm): ");
+            System.out.print("Ingrese fecha y hora (dd-MM-yyyy HH:mm): ");
             String fechaStr = scanner.nextLine();
 
             System.out.print("Ingrese motivo de la consulta: ");
@@ -78,7 +78,7 @@ public class CitaView {
                 System.out.println("❌ Error al programar la cita.");
             }
         } catch (DateTimeParseException e) {
-            System.out.println("❌ Error: Formato de fecha incorrecto. Use dd/MM/yyyy HH:mm");
+            System.out.println("❌ Error: Formato de fecha incorrecto. Use dd-MM-yyyy HH:mm");
         } catch (Exception e) {
             System.out.println("❌ Error: Ingrese datos válidos.");
             scanner.nextLine();

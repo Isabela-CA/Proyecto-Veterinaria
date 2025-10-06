@@ -19,11 +19,12 @@ public class DuenoView {
     public void mostrarMenuDueno() {
         System.out.println("""
             === Gestión de Dueños ===
-            1. Registrar Dueño
-            2. Listar Dueños
-            3. Buscar Dueño por ID
-            4. Actualizar Dueño
-            0. Salir
+           | 1. Registrar Dueño
+           | 2. Listar Dueños
+           | 3. Buscar Dueño por ID
+           | 4. Actualizar Dueño
+           | 0. Salir
+            ========================
             """);
 
         try {

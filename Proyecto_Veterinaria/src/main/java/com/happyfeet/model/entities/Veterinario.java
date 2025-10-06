@@ -1,33 +1,39 @@
 package com.happyfeet.model.entities;
 
-import com.happyfeet.model.enums.EspecialidadVeterinario;
-
 import java.time.LocalDate;
+import java.util.Objects;
 
+/**
+ * Entidad Veterinario
+ * Mapea la tabla veterinarios de la BD
+ */
 public class Veterinario {
     private int id;
-    private String documento_identidad;
     private String nombre_completo;
-    private EspecialidadVeterinario.Especialidad especialidad;
+    private String documento_identidad;
+    private String licencia_profesional;  // CAMPO FALTANTE
+    private String especialidad;
     private String telefono;
     private String email;
     private LocalDate fecha_contratacion;
-    private int activo;
+    private int activo;  // 1 = activo, 0 = inactivo
 
+    // Constructores
     public Veterinario() {
     }
 
-    // Constructor solo con id
     public Veterinario(int id) {
         this.id = id;
     }
 
     // Constructor sin id (para inserción)
-    public Veterinario(String documento_identidad, String nombre_completo,
-                       EspecialidadVeterinario.Especialidad especialidad, String telefono,
-                       String email, LocalDate fecha_contratacion, int activo) {
-        this.documento_identidad = documento_identidad;
+    public Veterinario(String nombre_completo, String documento_identidad,
+                       String licencia_profesional, String especialidad,
+                       String telefono, String email,
+                       LocalDate fecha_contratacion, int activo) {
         this.nombre_completo = nombre_completo;
+        this.documento_identidad = documento_identidad;
+        this.licencia_profesional = licencia_profesional;
         this.especialidad = especialidad;
         this.telefono = telefono;
         this.email = email;
@@ -35,11 +41,13 @@ public class Veterinario {
         this.activo = activo;
     }
 
-    // Constructor completo
-    public Veterinario(int id, String documento_identidad, String nombre_completo,
-                       EspecialidadVeterinario.Especialidad especialidad, String telefono,
-                       String email, LocalDate fecha_contratacion, int activo) {
-        this(documento_identidad, nombre_completo, especialidad, telefono, email, fecha_contratacion, activo);
+    // Constructor completo con id
+    public Veterinario(int id, String nombre_completo, String documento_identidad,
+                       String licencia_profesional, String especialidad,
+                       String telefono, String email,
+                       LocalDate fecha_contratacion, int activo) {
+        this(nombre_completo, documento_identidad, licencia_profesional,
+                especialidad, telefono, email, fecha_contratacion, activo);
         this.id = id;
     }
 
@@ -52,14 +60,6 @@ public class Veterinario {
         this.id = id;
     }
 
-    public String getDocumento_identidad() {
-        return documento_identidad;
-    }
-
-    public void setDocumento_identidad(String documento_identidad) {
-        this.documento_identidad = documento_identidad;
-    }
-
     public String getNombre_completo() {
         return nombre_completo;
     }
@@ -68,11 +68,27 @@ public class Veterinario {
         this.nombre_completo = nombre_completo;
     }
 
-    public EspecialidadVeterinario.Especialidad getEspecialidad() {
+    public String getDocumento_identidad() {
+        return documento_identidad;
+    }
+
+    public void setDocumento_identidad(String documento_identidad) {
+        this.documento_identidad = documento_identidad;
+    }
+
+    public String getLicencia_profesional() {
+        return licencia_profesional;
+    }
+
+    public void setLicencia_profesional(String licencia_profesional) {
+        this.licencia_profesional = licencia_profesional;
+    }
+
+    public String getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(EspecialidadVeterinario.Especialidad especialidad) {
+    public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
     }
 
@@ -112,9 +128,10 @@ public class Veterinario {
     public String toString() {
         return "Veterinario{" +
                 "id=" + id +
-                ", documento_identidad='" + documento_identidad + '\'' +
                 ", nombre_completo='" + nombre_completo + '\'' +
-                ", especialidad=" + especialidad +
+                ", documento_identidad='" + documento_identidad + '\'' +
+                ", licencia_profesional='" + licencia_profesional + '\'' +
+                ", especialidad='" + especialidad + '\'' +
                 ", telefono='" + telefono + '\'' +
                 ", email='" + email + '\'' +
                 ", fecha_contratacion=" + fecha_contratacion +
@@ -122,4 +139,17 @@ public class Veterinario {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Veterinario that = (Veterinario) o;
+        return id == that.id &&
+                Objects.equals(documento_identidad, that.documento_identidad) &&
+                Objects.equals(licencia_profesional, that.licencia_profesional);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, documento_identidad, licencia_profesional);
+    }
 }

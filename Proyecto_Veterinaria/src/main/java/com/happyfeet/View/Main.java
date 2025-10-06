@@ -7,18 +7,19 @@ import com.happyfeet.Service.*;
 
 import java.util.Scanner;
 
-
 public class Main {
 
     private static final Scanner input = new Scanner(System.in);
 
     // DAOs - usando interfaces
+    private static final IVeterinarioDAO iVeterinarioDAO = new VeterinarioDAO();
     private static final IDuenosDAO duenosDAO = new DuenosDAO();
     private static final IMascotaDAO mascotaDAO = new MascotaDAO();
     private static final ICitaDAO citaDAO = new CitaDAO();
     private static final IVeterinarioDAO veterinarioDAO = new VeterinarioDAO();
 
     // Services
+    private static final VeterinarioService veterinarioService = new VeterinarioService(veterinarioDAO);
     private static final DuenoService duenoService = new DuenoService(duenosDAO);
     private static final MascotaService mascotaService = new MascotaService(mascotaDAO, duenosDAO);
     private static final CitaService citaService = new CitaService(
@@ -27,29 +28,35 @@ public class Main {
             (VeterinarioDAO) veterinarioDAO
     );
 
+    private static VeterinarioController VeterinarioController;
     // Controladores
+    private static final VeterinarioController veterinarioController = new VeterinarioController(veterinarioService);
     private static final DuenosController duenosController = new DuenosController();
     private static final MascotaController mascotaController = new MascotaController();
     private static final CitaController citaController = new CitaController();
+    private static final ConsultaMedicaController consultaMedicaController = new ConsultaMedicaController();
     private static final HistorialClinicoController historialController = new HistorialClinicoController();
-    private static final ProcedimientoQuirurgicoController procedimientoController =
-            new ProcedimientoQuirurgicoController();
+    private static final ProcedimientoEspecialController procedimientoController =
+            new ProcedimientoEspecialController();
+
 
     // Views
+    private static final VeterinarioView VeterinarioView = new VeterinarioView(VeterinarioController);
+    private static final ConsultaMedicaView consultaMedicaView = new ConsultaMedicaView(consultaMedicaController, input);
     private static final DuenoView duenoView = new DuenoView(duenosController);
     private static final MascotaView mascotaView = new MascotaView(mascotaController);
     private static final CitaView citaView = new CitaView(citaController);
     private static final HistorialClinicoView historialView = new HistorialClinicoView(historialController);
-    private static final ProcedimientoQuirurgicoView procedimientoView =
-            new ProcedimientoQuirurgicoView(procedimientoController);
+    private static final ProcedimientoEspecialView procedimientoView =
+            new ProcedimientoEspecialView(procedimientoController);
 
     public static void main(String[] args) {
         System.out.println("""
-            ╔════════════════════════════════════════════════════╗
-            ║   SISTEMA DE GESTIÓN VETERINARIA HAPPY FEET        ║
-            ╚════════════════════════════════════════════════════╝
-            Bienvenido al sistema de gestión veterinaria
-            """);
+                ╔════════════════════════════════════════════════════╗
+                ║   SISTEMA DE GESTIÓN VETERINARIA HAPPY FEET        ║
+                ╚════════════════════════════════════════════════════╝
+                Bienvenido al sistema de gestión veterinaria
+                """);
 
         boolean continuar = true;
 
@@ -61,20 +68,20 @@ public class Main {
         input.close();
     }
 
-    private static boolean mostrarMenuPrincipal() {
+    static boolean mostrarMenuPrincipal() {
         System.out.println("""
-            
-            ════════════════════════════════════════════════════
-            ═══ MENÚ PRINCIPAL VETERINARIA HAPPY FEET ═══
-            ════════════════════════════════════════════════════
-            1. Gestión de Dueños
-            2. Gestión de Mascotas
-            3. Gestión de Citas
-            4. Gestión de Historial Clínico
-            5. Procedimientos Quirúrgicos
-            0. Salir del Sistema
-            ════════════════════════════════════════════════════
-            """);
+                
+                ════════════════════════════════════════════════════
+                ═══ MENÚ PRINCIPAL VETERINARIA HAPPY FEET ═══
+                ════════════════════════════════════════════════════
+                1. Gestión de Dueños
+                2. Gestión de Mascotas
+                3. Gestión de citas y consultas medicas 
+                4. Procedimientos Especiales
+                5. Gestion veterinario
+                0. Salir del Sistema
+                ════════════════════════════════════════════════════
+                """);
         System.out.print("Seleccione una opción: ");
 
         try {
@@ -91,23 +98,24 @@ public class Main {
                     yield true;
                 }
                 case 3 -> {
-                    mostrarSubmenuCitas();
+                    mostrarSubmenuCitasYConsultas();
                     yield true;
                 }
                 case 4 -> {
-                    mostrarSubmenuHistorialClinico();
+                    mostrarSubmenuProcedimientosEspeciales();
                     yield true;
                 }
                 case 5 -> {
-                    mostrarSubmenuProcedimientosQuirurgicos();
+                    mostrarMenuVeterinario();
                     yield true;
                 }
+
                 case 0 -> {
                     System.out.println("""
-                        
-                        ¡Gracias por usar el sistema veterinario Happy Feet!
-                        Cerrando sistema...
-                        """);
+                            
+                            ¡Gracias por usar el sistema veterinario Happy Feet!
+                            Cerrando sistema...
+                            """);
                     yield false;
                 }
                 default -> {
@@ -127,17 +135,17 @@ public class Main {
 
         while (!volverAlMenuPrincipal) {
             System.out.println("""
-                
-                ════════════════════════════════════════
-                ═══ GESTIÓN DE DUEÑOS ═══
-                ════════════════════════════════════════
-                1. Registrar Dueño
-                2. Listar Dueños
-                3. Buscar Dueño por ID
-                4. Actualizar Dueño
-                0. Volver al Menú Principal
-                ════════════════════════════════════════
-                """);
+                    
+                    ════════════════════════════════════════
+                    ═══ GESTIÓN DE DUEÑOS ═══
+                    ════════════════════════════════════════
+                    1. Registrar Dueño
+                    2. Listar Dueños
+                    3. Buscar Dueño por ID
+                    4. Actualizar Dueño
+                    0. Volver al Menú Principal
+                    ════════════════════════════════════════
+                    """);
             System.out.print("Seleccione una opción: ");
 
             try {
@@ -181,16 +189,17 @@ public class Main {
         }
     }
 
+
     private static void mostrarSubmenuMascotas() {
         boolean volverAlMenuPrincipal = false;
 
         while (!volverAlMenuPrincipal) {
             System.out.println("""
-                
-                ════════════════════════════════════════
-                ═══ GESTIÓN DE MASCOTAS ═══
-                ════════════════════════════════════════
-                """);
+                    
+                    ════════════════════════════════════════
+                    ═══ GESTIÓN DE MASCOTAS ═══
+                    ════════════════════════════════════════
+                    """);
 
             try {
                 mascotaView.mostrarMenuMascotas();
@@ -200,6 +209,49 @@ public class Main {
                 pausarYContinuar();
                 volverAlMenuPrincipal = true;
             }
+        }
+    }
+
+    private static boolean mostrarSubmenuCitasYConsultas() {
+        System.out.println("""             
+                
+                ════════════════════════════════════════════════════
+                ═══ Citas y consultas ═══
+                ════════════════════════════════════════════════════
+                1. gestion cita
+                2. gestion consultas medicas
+                0. volver al menu principal
+                ════════════════════════════════════════════════════
+                """);
+        System.out.print("Seleccione una opción: ");
+
+        try {
+            int opcion = input.nextInt();
+            input.nextLine(); // limpiar buffer
+
+            return switch (opcion) {
+                case 1 -> {
+                    mostrarSubmenuCitas();
+                    yield true;
+                }
+                case 2 -> {
+                    nostarSubmenuColsultaMedicaView();
+                    yield true;
+                }
+                case 0 -> {
+                    mostrarMenuPrincipal();
+                    System.out.println("regresando al menu principal..... ");
+                    yield true;
+                }
+                default -> {
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                    yield false;
+                }
+            };
+        } catch (Exception e) {
+            System.out.println("Error: Ingrese un número válido");
+            input.nextLine(); // limpiar buffer en caso de error
+            return true;
         }
     }
 
@@ -225,6 +277,73 @@ public class Main {
         }
     }
 
+    // ------- CONSULTAS MEDICAS
+
+    private static void nostarSubmenuColsultaMedicaView() {
+        boolean volverAlMenuPrincipal = false;
+
+        while (!volverAlMenuPrincipal) {
+            System.out.println("""
+                
+                ════════════════════════════════════════
+                ═══ GESTIÓN DE CONSULTA MEDICA ═══
+                ════════════════════════════════════════
+                """);
+
+            try {
+                consultaMedicaView.mostrarMenuConsultaMedica();  // CAMBIO AQUÍ
+                volverAlMenuPrincipal = true;
+            } catch (Exception e) {
+                System.out.println("Error en el menú de consulta medica: " + e.getMessage());
+                pausarYContinuar();
+                volverAlMenuPrincipal = true;
+            }
+        }
+    }
+
+    private static boolean mostrarSubmenuProcedimientosEspeciales() {
+        System.out.println("""             
+                
+                ════════════════════════════════════════════════════
+                ═══ PROCEDIMIENTOS ESPECIALES ═══
+                ════════════════════════════════════════════════════
+                1. Gestión de Historial Clinico
+                2. Gestión de procedimientos Quirurgicos
+                0. volver al menu principal
+                ════════════════════════════════════════════════════
+                """);
+        System.out.print("Seleccione una opción: ");
+
+        try {
+            int opcion = input.nextInt();
+            input.nextLine(); // limpiar buffer
+
+            return switch (opcion) {
+                case 1 -> {
+                    mostrarSubmenuHistorialClinico();
+                    yield true;
+                }
+                case 2 -> {
+                    mostrarMenuProcedimiento();
+                    yield true;
+                }
+                case 0 -> {
+                    mostrarMenuPrincipal();
+                    System.out.println("regresando al menu principal..... ");
+                    yield true;
+                }
+                default -> {
+                    System.out.println("Opción inválida. Intente  nuevamente.");
+                    yield false;
+                }
+            };
+        } catch (Exception e) {
+        System.out.println("Error: Ingrese un número válido");
+        input.nextLine(); // limpiar buffer en caso de error
+        return true;
+    }
+}
+
     private static void mostrarSubmenuHistorialClinico() {
         boolean volverAlMenuPrincipal = false;
 
@@ -247,7 +366,7 @@ public class Main {
         }
     }
 
-    private static void mostrarSubmenuProcedimientosQuirurgicos() {
+    private static void mostrarMenuProcedimiento() {
         boolean volverAlMenuPrincipal = false;
 
         while (!volverAlMenuPrincipal) {
@@ -259,7 +378,7 @@ public class Main {
                 """);
 
             try {
-                procedimientoView.mostrarMenuProcedimientos();
+                procedimientoView.mostrarMenu();
                 volverAlMenuPrincipal = true;
             } catch (Exception e) {
                 System.out.println("Error en el menú de procedimientos quirúrgicos: " + e.getMessage());
@@ -268,6 +387,29 @@ public class Main {
             }
         }
     }
+
+    private static void mostrarMenuVeterinario() {
+        boolean volverAlMenuPrincipal = false;
+
+        while (!volverAlMenuPrincipal) {
+            System.out.println("""
+                
+                ════════════════════════════════════════
+                ═══ Gestion veterinario ═══
+                ════════════════════════════════════════
+                """);
+
+            try {
+                VeterinarioView.MenuVeterinarios();
+                volverAlMenuPrincipal = true;
+            } catch (Exception e) {
+                System.out.println("Error en el menú de procedimientos quirúrgicos: " + e.getMessage());
+                pausarYContinuar();
+                volverAlMenuPrincipal = true;
+            }
+        }
+    }
+
 
     private static void pausarYContinuar() {
         System.out.println("\nPresione Enter para continuar...");
