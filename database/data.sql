@@ -402,3 +402,115 @@ INSERT INTO movimientos_inventario (producto_id, tipo_movimiento, cantidad, stoc
 -- Más Salidas
 (10, 'Salida', 5, 70, 65, 'Venta dieta blanda post-operatoria', 68, 7, 'Vet_001'),
 (5, 'Salida', 1, 90, 89, 'Uso en toma de biopsia', 69, 1, 'Vet_004');
+
+INSERT INTO servicios (nombre, descripcion, categoria, precio_base, duracion_estimada_minutos, activo)
+VALUES
+('Consulta general', 'Revisión médica completa para mascotas', 'Consulta', 45000, 30, TRUE),
+('Vacunación antirrábica', 'Aplicación de vacuna antirrábica anual', 'Vacunación', 25000, 15, TRUE),
+('Desparasitación interna', 'Tratamiento para eliminar parásitos intestinales', 'Tratamiento', 20000, 20, TRUE),
+('Limpieza dental', 'Limpieza bucal profesional para mascotas', 'Higiene', 70000, 45, TRUE),
+('Cirugía menor', 'Procedimientos quirúrgicos menores', 'Cirugía', 180000, 120, TRUE),
+('Control postoperatorio', 'Revisión después de una cirugía', 'Consulta', 35000, 25, TRUE),
+('Baño medicado', 'Baño especial para piel sensible o con infección', 'Higiene', 40000, 40, TRUE),
+('Esterilización', 'Procedimiento quirúrgico para esterilizar la mascota', 'Cirugía', 220000, 180, TRUE),
+('Radiografía', 'Toma e interpretación de radiografías veterinarias', 'Diagnóstico', 95000, 60, TRUE),
+('Ecografía abdominal', 'Ecografía para diagnóstico interno', 'Diagnóstico', 105000, 50, TRUE);
+
+INSERT INTO facturas (dueno_id, numero_factura, fecha_emision, subtotal, impuesto, descuento, total, metodo_pago, estado, observaciones)
+VALUES
+(1, 'FAC-001', '2025-10-01 10:30:00', 45000, 8550, 0, 53550, 'Efectivo', 'Pagada', 'Consulta general pagada en efectivo'),
+(2, 'FAC-002', '2025-10-02 09:00:00', 25000, 4750, 0, 29750, 'Tarjeta', 'Pagada', 'Vacunación completada'),
+(3, 'FAC-003', '2025-10-03 14:10:00', 20000, 3800, 0, 23800, 'Efectivo', 'Pagada', 'Desparasitación interna'),
+(4, 'FAC-004', '2025-10-03 17:40:00', 70000, 13300, 0, 83300, 'Transferencia', 'Pagada', 'Limpieza dental de rutina'),
+(5, 'FAC-005', '2025-10-04 11:30:00', 180000, 34200, 0, 214200, 'Tarjeta', 'Pagada', 'Cirugía menor realizada'),
+(1, 'FAC-006', '2025-10-04 15:50:00', 35000, 6650, 0, 41650, 'Efectivo', 'Pagada', 'Control postoperatorio'),
+(2, 'FAC-007', '2025-10-05 13:25:00', 40000, 7600, 0, 47600, 'Mixto', 'Pendiente', 'Baño medicado'),
+(3, 'FAC-008', '2025-10-05 16:00:00', 220000, 41800, 0, 261800, 'Tarjeta', 'Pagada', 'Esterilización canina'),
+(4, 'FAC-009', '2025-10-06 09:45:00', 95000, 18050, 0, 113050, 'Transferencia', 'Pagada', 'Radiografía general'),
+(5, 'FAC-010', '2025-10-06 12:20:00', 105000, 19950, 0, 124950, 'Tarjeta', 'Pagada', 'Ecografía abdominal');
+
+INSERT INTO items_factura (factura_id, tipo_item, servicio_id, servicio_descripcion, cantidad, precio_unitario, subtotal)
+VALUES
+(1, 'Servicio', 1, 'Consulta general', 1, 45000, 45000),
+(2, 'Servicio', 2, 'Vacunación antirrábica', 1, 25000, 25000),
+(3, 'Servicio', 3, 'Desparasitación interna', 1, 20000, 20000),
+(4, 'Servicio', 4, 'Limpieza dental', 1, 70000, 70000),
+(5, 'Servicio', 5, 'Cirugía menor', 1, 180000, 180000),
+(6, 'Servicio', 6, 'Control postoperatorio', 1, 35000, 35000),
+(7, 'Servicio', 7, 'Baño medicado', 1, 40000, 40000),
+(8, 'Servicio', 8, 'Esterilización', 1, 220000, 220000),
+(9, 'Servicio', 9, 'Radiografía', 1, 95000, 95000),
+(10, 'Servicio', 10, 'Ecografía abdominal', 1, 105000, 105000);
+
+INSERT INTO mascotas_adopcion (mascota_id, fecha_ingreso, motivo_ingreso, estado, historia, temperamento, necesidades_especiales, foto_adicional_url)
+VALUES
+(1, '2025-07-01', 'Abandono', 'Disponible', 'Fue encontrada en la calle, en buen estado general.', 'Sociable y cariñosa', NULL, 'https://ejemplo.com/foto1.jpg'),
+(2, '2025-07-05', 'Entrega voluntaria', 'Disponible', 'Su antiguo dueño no podía mantenerla.', 'Tranquila y obediente', 'Requiere alimento hipoalergénico', 'https://ejemplo.com/foto2.jpg'),
+(3, '2025-07-10', 'Rescate', 'En Proceso', 'Rescatada de un accidente leve, ya recuperada.', 'Juguetón y curioso', NULL, 'https://ejemplo.com/foto3.jpg'),
+(4, '2025-07-15', 'Abandono', 'Adoptada', 'Perrito mestizo rescatado en buen estado.', 'Protector y leal', NULL, 'https://ejemplo.com/foto4.jpg'),
+(5, '2025-07-20', 'Maltrato', 'Retirada', 'Gata recuperada de maltrato, aún en tratamiento.', 'Reservada', 'No puede convivir con otros gatos', 'https://ejemplo.com/foto5.jpg'),
+(6, '2025-07-22', 'Rescate', 'Disponible', 'Cachorro encontrado en una caja.', 'Muy activo', NULL, 'https://ejemplo.com/foto6.jpg'),
+(7, '2025-07-25', 'Entrega voluntaria', 'Disponible', 'Dueño se mudó y no podía llevarla.', 'Cariñosa y tranquila', NULL, 'https://ejemplo.com/foto7.jpg'),
+(8, '2025-07-30', 'Abandono', 'En Proceso', 'Encontrado desnutrido, ya recuperado.', 'Dócil y sociable', NULL, 'https://ejemplo.com/foto8.jpg'),
+(9, '2025-08-02', 'Rescate', 'Adoptada', 'Rescatada con sus crías, adoptada junto a una de ellas.', 'Protectora y dulce', NULL, 'https://ejemplo.com/foto9.jpg'),
+(10, '2025-08-05', 'Maltrato', 'Disponible', 'Rehabilitada y lista para adopción.', 'Amable con niños', 'Debe comer comida blanda', 'https://ejemplo.com/foto10.jpg');
+
+INSERT INTO adopciones (mascota_adopcion_id, dueno_id, fecha_adopcion, contrato_texto, condiciones_especiales, seguimiento_requerido, fecha_primer_seguimiento)
+VALUES
+(4, 2, '2025-08-01', 'Contrato firmado por el adoptante bajo normas del centro veterinario.', 'Visita de control a los 30 días.', TRUE, '2025-09-01'),
+(9, 4, '2025-08-10', 'Contrato formal de adopción responsable.', 'Control veterinario trimestral.', TRUE, '2025-09-10');
+
+INSERT INTO jornadas_vacunacion (nombre, fecha, hora_inicio, hora_fin, ubicacion, descripcion, capacidad_maxima, estado)
+VALUES
+('Jornada Antirrábica Julio', '2025-07-20', '09:00:00', '16:00:00', 'Parque Principal', 'Vacunación gratuita antirrábica para perros y gatos.', 100, 'Finalizada'),
+('Jornada Antiparasitaria Agosto', '2025-08-15', '08:00:00', '14:00:00', 'Centro Comunitario', 'Desparasitación general y orientación veterinaria.', 120, 'Finalizada'),
+('Jornada Felina Septiembre', '2025-09-10', '09:00:00', '15:00:00', 'Veterinaria Happy Feet', 'Vacunación y chequeo para gatos.', 80, 'Finalizada'),
+('Campaña Antirrábica Octubre', '2025-10-10', '08:30:00', '17:00:00', 'Unidad Deportiva Sur', 'Aplicación gratuita de vacuna antirrábica.', 150, 'En Curso'),
+('Jornada de Bienestar Animal', '2025-11-01', '09:00:00', '15:00:00', 'Colegio San Martín', 'Servicios gratuitos: vacunación, desparasitación y charlas.', 200, 'Planificada');
+
+INSERT INTO registro_jornada_vacunacion (jornada_id, mascota_id, dueno_id, vacuna_id, veterinario_id, fecha_hora, lote_vacuna, proxima_dosis, observaciones)
+VALUES
+(1, 1, 1, 3, 1, '2025-07-20 09:30:00', 'L-001', '2026-07-20', 'Sin reacciones adversas'),
+(1, 2, 2, 3, 2, '2025-07-20 10:15:00', 'L-002', '2026-07-20', 'Mascota tranquila'),
+(2, 3, 3, 4, 3, '2025-08-15 08:45:00', 'L-005', '2026-02-15', 'Desparasitación aplicada correctamente'),
+(2, 4, 4, 4, 1, '2025-08-15 09:20:00', 'L-006', '2026-02-15', 'Sin novedades'),
+(3, 5, 5, 3, 2, '2025-09-10 10:00:00', 'L-010', '2026-09-10', 'Aplicada vacuna triple felina'),
+(4, 6, 1, 3, 3, '2025-10-10 09:00:00', 'L-011', '2026-10-10', 'Reacción leve en zona de aplicación'),
+(4, 7, 2, 3, 1, '2025-10-10 09:40:00', 'L-012', '2026-10-10', 'Vacunación exitosa');
+
+INSERT INTO club_mascotas (dueno_id, puntos_acumulados, puntos_canjeados, puntos_disponibles, nivel, fecha_inscripcion)
+VALUES
+(1, 250, 50, 200, 'Plata', '2025-01-15'),
+(2, 500, 100, 400, 'Oro', '2025-02-10'),
+(3, 120, 0, 120, 'Bronce', '2025-03-05'),
+(4, 800, 200, 600, 'Oro', '2025-03-25'),
+(5, 1500, 300, 1200, 'Diamante', '2025-04-01');
+
+INSERT INTO transacciones_puntos (club_mascotas_id, factura_id, puntos, tipo, descripcion, saldo_anterior, saldo_nuevo)
+VALUES
+(1, 1, 50, 'Ganados', 'Compra de servicio veterinario', 150, 200),
+(2, 2, 100, 'Ganados', 'Vacunación antirrábica', 300, 400),
+(3, 3, 20, 'Ganados', 'Compra de producto antipulgas', 100, 120),
+(4, 4, 200, 'Ganados', 'Cirugía menor', 400, 600),
+(5, 5, 300, 'Ganados', 'Servicio completo premium', 900, 1200),
+(2, NULL, 50, 'Canjeados', 'Uso de puntos en descuento', 400, 350),
+(1, NULL, 20, 'Expirados', 'Puntos expirados por inactividad', 200, 180);
+
+INSERT INTO beneficios_club (nombre, descripcion, nivel_requerido, puntos_necesarios, tipo_beneficio, valor_beneficio)
+VALUES
+('Descuento 10%', 'Descuento del 10% en servicios veterinarios.', 'Bronce', 100, 'Descuento', 10.00),
+('Baño Gratis', 'Baño gratuito para mascotas pequeñas.', 'Plata', 300, 'Servicio Gratis', 40000.00),
+('Producto Premium Gratis', 'Comida para mascota de gama alta.', 'Oro', 600, 'Producto Gratis', 80000.00),
+('Doble Puntos', 'Obtén puntos dobles en la próxima compra.', 'Oro', 200, 'Puntos Extra', NULL),
+('Chequeo Anual Gratis', 'Chequeo veterinario gratuito anual.', 'Diamante', 1000, 'Servicio Gratis', 90000.00);
+
+INSERT INTO canjes_beneficios (club_mascotas_id, beneficio_id, puntos_canjeados, estado, fecha_expiracion, factura_id)
+VALUES
+(1, 1, 100, 'Aplicado', '2025-12-31', 1),
+(2, 2, 300, 'Pendiente', '2026-01-15', 2),
+(3, 1, 100, 'Aplicado', '2025-11-30', 3),
+(4, 3, 600, 'Aplicado', '2026-02-01', 4),
+(5, 5, 1000, 'Aplicado', '2026-03-01', 5);
+
+
+
