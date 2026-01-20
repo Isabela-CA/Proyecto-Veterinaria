@@ -1,5 +1,5 @@
 # 🐾 Sistema de Gestión Integral – Veterinaria *Happy Feet*
-<img width="497" height="456" alt="happy-feet" src="https://github.com/user-attachments/assets/5bfb53a9-bb77-490c-b9f6-73a1ff9b192f" />
+<img width="299" height="268" alt="happy" src="https://github.com/user-attachments/assets/960e7d35-05f2-476d-9cb8-904f805e4060" />
 
 ## 📖 Descripción del Proyecto
 
